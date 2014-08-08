@@ -1,0 +1,9 @@
+0:
+    user_id: 7
+    user_friend_id: 1
+    confirmed: 1
+
+1:
+    user_id: 3
+    user_friend_id: 1
+    confirmed: -1

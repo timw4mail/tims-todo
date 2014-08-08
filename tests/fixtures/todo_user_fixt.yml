@@ -1,0 +1,30 @@
+0:
+    id: 3
+    username: 'guest'
+    password: '$2y$10$qW8HlbNDNEJx1GqmYW9APOYOqo5apV8stjNcV/xunsvnjTYJBTc0m'
+    email: 'guest@timshomepage.net'
+    enabled: 1
+    timezone: 'America/Detroit'
+    num_format: 0
+    reset_token: ''
+
+1:
+    id: 7
+    username: 'aviat4ion'
+    password: '$2y$10$RIgnyU.N.IxJxGYXU9Ic9eXQnLcT4/N11hMLiBPdUDfmrpMLIYIJW'
+    email: 'timw4mail@gmail.com'
+    enabled: 1
+    timezone: 'America/Detroit'
+    num_format: 0
+    reset_token: ''
+
+2:
+    id: 1
+    username: 'timw4mail'
+    password: '$2y$10$xZUm0v51mxS9LFhrJCdOB.gY.0642mf57F9kDROSmLUx6kdUagaAK'
+    email: 'tim@timshomepage.net'
+    enabled: 1
+    timezone: 'America/Detroit'
+    num_format: 1
+    reset_token: ''
+

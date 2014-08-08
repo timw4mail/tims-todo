@@ -1,0 +1,24 @@
+0:
+    group_id: 11
+    user_id: 1
+    is_admin: 1
+
+1:
+    group_id: 53
+    user_id: 3
+    is_admin: 1
+
+2:
+    group_id: 59
+    user_id: 7
+    is_admin: 1
+
+3:
+    group_id: 62
+    user_id: 7
+    is_admin: 0
+
+4:
+    group_id: 62
+    user_id: 3
+    is_admin: 1

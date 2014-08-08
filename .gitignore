@@ -1,0 +1,6 @@
+web/cron.log
+application/logs/*.php
+application/cache/*
+web/coverage/*
+vendor/*
+composer.lock

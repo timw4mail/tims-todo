@@ -1,0 +1,16 @@
+1:
+    id: 22
+    user_id: 3
+    item_id: 97
+    comment: "This is a test comment"
+    time_posted: 1405457296
+    status: 3
+
+2:
+    id: 25
+    user_id: 1
+    item_id: 97
+    comment: "This is another test comment"
+    time_posted: 1405457296
+    status: 3
+

@@ -1,0 +1,36 @@
+0:
+    id: 1
+    value: 'Optional'
+
+1:
+    id: 2
+    value: 'Lowest'
+
+2:
+    id: 3
+    value: 'Lower'
+
+3:
+    id: 4
+    value: 'Low'
+
+4:
+    id: 5
+    value: 'Normal'
+
+5:
+    id: 6
+    value: 'High'
+
+6:
+    id: 7
+    value: 'Higher'
+
+7:
+    id: 8
+    value: 'Highest'
+
+8:
+    id: 9
+    value: 'Immediate'
+

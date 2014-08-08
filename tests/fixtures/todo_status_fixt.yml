@@ -1,0 +1,20 @@
+0:
+    id: 3
+    value: 'In Progress'
+
+1:
+    id: 4
+    value: 'On Hold'
+
+2:
+    id: 5
+    value: 'Canceled'
+
+3:
+    id: 2
+    value: 'Completed'
+
+4:
+    id: 1
+    value: 'Created'
+

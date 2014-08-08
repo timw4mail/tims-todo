@@ -1,0 +1,12 @@
+0:
+    id: 18
+    task_id: 97
+    desc: 'Share this task'
+    is_checked: 1
+
+1:
+    id: 136
+    task_id: 97
+    desc: 'Allow un-sharing'
+    is_checked: 1
+

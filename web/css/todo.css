@@ -1,0 +1,760 @@
+/* Reset Styles */
+
+*{
+	margin:0;
+	padding:0;
+	font-size-adjust:0.5;
+	font-family:helvetica,arial,freesans,clean,sans-serif;
+	font-weight:100;
+	line-height:1.25;
+	text-rendering:optimizeLegibility;
+}
+
+a, a:visited, a:hover{
+	text-decoration:none;
+	color:#00E;
+}
+
+a:hover{
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+dd{
+	margin:1em 0 1em 2em;
+}
+
+dl{
+	margin-left:1em;
+}
+
+
+/* Declare html5 elements as block-level elements */
+section, header, footer, aside, nav{
+	display:block;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	vertical-align:top;
+	text-align:left;
+	width:100%;
+}
+
+th{
+	background:url('/images/bgs/Title.png');
+	color:#fff;
+	text-align:left;
+}
+
+th a, .err_wrap, #task_view dt{
+	font-weight:bold;
+}
+
+p{
+	line-height:1.75;
+	margin:0 1em;
+}
+
+section table{
+	border:1px solid rgba(0,0,0,0.5);
+}
+
+td, th{
+	padding:.35em .5em;
+}
+
+td{
+	border-bottom:1px solid rgba(0,0,0,0.5);
+}
+
+td a {
+	display:inline-block;
+}
+
+tbody tr{
+	background:#fff;
+	color:#005;
+}
+
+fieldset{
+	border:0;
+}
+
+form legend{
+	font-size:1.5em;
+}
+
+input, select, option, label{
+	font-size:1em;
+}
+
+input[size="40"]{
+	width:40em;
+}
+
+input[size="10"]{
+	width:10em;
+}
+
+input[size="2"]{
+	width:2em;
+}
+
+option[selected="selected"]{
+	background:#ABCDEF;
+}
+
+option{
+	text-align:justify;
+	vertical-align:top;
+	padding-right:.5em;
+}
+
+textarea[cols="80"]{
+	width:40em;
+}
+
+/* -------------- */
+/* General Styles */
+/* -------------- */
+
+html, body{
+	background:linear-gradient(to right, #1E5799 0%, #7db9e8 50%, #1E5799 100%);
+	color:#005;
+}
+
+body {
+	margin:0 1em;
+}
+
+input, textarea, select{
+	vertical-align:top;
+}
+
+section, header, footer, nav .active, .fb,
+.err_wrap, .wrap {
+	background:#fff;
+	background:rgba(255,255,255,.65);
+}
+
+header, footer, nav, .wrap {
+	padding:0.75em;
+}
+
+td.today{
+	background:#abcdef;
+}
+
+nav {
+	background: rgba(0,0,128,0.1);
+	padding:0.5em;
+	border-radius:0.5em;
+}
+
+nav li{
+    position:relative;
+	display:inline-block;
+}
+
+section{
+	border-width:1px 0;
+	border-style: solid;
+	border-color: rgba(0,0,85,0.4);
+}
+
+#home fieldset dt, #home fieldset dd{
+	display:block;
+}
+
+
+
+input[type="submit"], input[type="button"]{
+	background:url('/images/bgs/Title.png');
+	color:#fff;
+	padding:0.5em;
+	border-radius:5px;
+	border:0;
+}
+
+table, td, th, thead, tr{
+	-moz-border-radius:0;
+	border-radius:0;
+}
+
+body{
+	font-size:1em;
+}
+
+hr{
+	display:none;
+}
+
+a, img{
+	border:0;
+}
+
+header li{
+	display:inline-block;
+	padding:.5%;
+	margin:0 .5em;
+}
+
+header li a{
+	display:block;
+	width:100%;
+	height:100%;
+}
+
+header, footer, .wrap {
+	border-radius:0.5em;
+	margin: 1em 0;
+}
+
+header {
+	border-top-left-radius:0;
+	border-top-right-radius:0;
+	margin-top:0;
+}
+
+footer {
+	display:inline-block;
+}
+
+
+.error{
+	color:#fff;
+	margin:1em;
+	display:list-item;
+	font-weight:normal;
+}
+
+.err_wrap{
+	background:#f00;
+	background:rgba(255,0,0,.65);
+	margin:.5%;
+	color:#fff;
+	font-weight:bold;
+}
+
+.clearB{
+	clear:both;
+	display:none;
+}
+
+.bulleted{
+	list-style-type:disc;
+	padding-left:1.5em;
+	line-height:1.25;
+	margin:1em;
+}
+
+
+
+tbody .alt, #task_comment_list .alt{
+	background:#ddd;
+	color:#005;
+}
+
+tbody th a,.sortable a, .forward-sort a, .sortable-text a, .sortable-numeric a{
+	color:#fff;
+}
+
+
+/* ---------------- */
+/* Task List Styles */
+/* ---------------- */
+
+caption, #task_list h1{
+	font-size:1.5em;
+	text-align:left;
+	text-transform:capitalize;
+}
+
+#task_list table{
+	width:99%;
+	margin:.5%;
+}
+
+.id, .overdue .id{
+	font-size:.8em;
+}
+
+#task_list .taskTitle, #task_list .id{
+	text-align:left;
+}
+
+.priority{
+	padding-left:24px;
+}
+
+.wrap {
+	border-radius:0.5em;
+}
+
+#left_nav li{
+	padding:0 0.5em;
+	text-align:left;
+	line-height:1.5em;
+	display:inline-block;
+}
+
+#left_nav li a{
+	display:inline-block;
+	margin-left:.25em;
+	/*width:90%;*/
+	height:100%;
+}
+
+.immediate, td.immediate, .overdue td{
+	background:url('/images/icons/exclamation.png') no-repeat center left;
+	font-weight:bold;
+	font-style:italic;
+	color:#900000;
+}
+
+.overdue td{
+	background:none;
+	font-style:normal;
+}
+
+/** Icon sprite **/
+.icon{
+	margin:0 0.25em;
+	display:inline-block;
+	vertical-align:middle;
+	height:16px;
+	width:16px;
+	background:url(/images/famfamfam.png) no-repeat center left;
+}
+
+.icon.active_tasks{background-position: -352px -32px}
+.icon.add{background-position: -16px -0px}
+.icon.archive{background-position: -192px -32px}
+.icon.calendar{background-position: -16px -64px}
+.icon.cat{background-position: -224px -32px}
+.icon.close{background-position: -208px -112px}
+.icon.edit{background-position: -176px -272px}
+.icon.group{background-position: -224px -176px}
+.icon.group_add{background-position: -240px -176px}
+.icon.group_edit{background-position: -272px -176px}
+.icon.immediate, .icon.error{background-position: -512px -144px}
+.icon.information, .icon.info{background-position: -96px -192px}
+.icon.lock_edit{background-position: -208px -208px}
+.icon.search{background-position: -592px -384px}
+.icon.success{background-position: -0px -0px}
+.icon.status_online{background-position: -64px -336px}
+.icon.user_comment{background-position: -576px -368px}
+/** End Icon sprite **/
+
+
+.high, .higher, .highest{
+	background:url('/images/icons/error.png') no-repeat center left;
+	font-family:'Puritan2.0Bold',serif;
+}
+
+.highest{
+	background:url('/images/icons/urgent.png') no-repeat center left;
+	color:#900000;
+}
+
+.delete{
+	background:url('/images/icons/circular/cancel.png') no-repeat center left;
+	padding-left:1.5em;
+}
+
+.editComment{
+	float:right;
+	margin-right:0;
+}
+
+.editComment a{
+	margin-left:1em;
+}
+
+/* ---------------- */
+/* Task View Styles */
+/* ---------------- */
+
+#title{
+	width:450px;
+}
+
+#task_view ul.ui-tabs-nav{
+	padding:0;
+}
+
+#task_view dd li{
+	display:list-item;
+	list-style-type:disc;
+	margin-left:.5em;
+	padding-left:.5em;
+}
+
+#task_view dt{
+	font-weight:bold;
+}
+
+#task_view, #task_add{
+	position:relative;
+}
+
+#task_view #editTask{
+	position:absolute;
+	line-height:1em;
+	display:block;
+	right:.5em;
+	top:.5em;
+}
+
+#task_view #editTask a{
+	display:inline-block;
+}
+
+#task_view #editTask #editTaskIcon{
+	background:url('/images/icons/pencil.png') no-repeat top left;
+	padding-left:24px;
+}
+
+#task_view #delTask{
+	background:url('/images/icons/circular/cancel.png') no-repeat top left;
+	padding:0 24px;
+	line-height:1em;
+}
+
+#task_add #delTask{
+	background:url('/images/icons/circular/cancel.png') no-repeat top left;
+	padding-left:24px;
+	position:absolute;
+	display:block;
+	line-height:1em;
+	right:.5em;
+	top:.5em;
+}
+
+#task_view #task_desc{
+	padding:1em;
+	width:80%;
+}
+
+/* Social Media Link Buttons */
+#fb_link, #twitter_link{
+	background:url('/images/signin_facebook.png') no-repeat top left;
+	height:24px;
+	width:150px;
+	display:inline-block;
+	overflow:hidden;
+	text-decoration:none;
+}
+
+#twitter_link{
+	background:url('/images/signin_twitter.png') no-repeat top left;
+}
+
+
+#fb_link:hover, #fb_link:focus{
+	background:url('/images/signin_facebook.png') no-repeat 0 -48px;
+}
+
+#twitter_link:hover, #twitter_link:focus{
+	background:url('/images/signin_twitter.png') no-repeat 0 -48px;
+}
+
+#toggle_comments:hover{
+	cursor:pointer;
+}
+
+/* task view and comments */
+#tabs-1, #tabs-2 {
+	border-top-right-radius:0.5em;
+}
+
+#tabs dt, #tabs dd{
+	display:inline-block;
+}
+
+#task_details textarea{
+	width:98%;
+}
+
+#task_comment_list{
+	border-radius:0.5em;
+	display:block;
+	width:98%;
+	padding:.5em;
+	margin:.5em auto;
+	font-size:.909em;
+}
+
+select#friends option{
+	padding:0 1em;
+}
+
+
+/* Checklist styles*/
+#checklist {
+	background:transparent;
+	margin:0.5em;
+	padding:0.5em;
+}
+
+#task_checklist{
+	border-radius:0.5em;
+	width:100%;
+}
+
+#pagination{
+	width:98%;
+}
+
+#checklist input, #checklist label{
+	display:inline-block;
+	vertical-align:middle;
+}
+
+#checklist li:nth-child(even){
+	background:#ddd;
+}
+
+/* Task Calendar styles */
+#task_calendar{
+	position:static;
+}
+
+#task_calendar th, #task_calendar td{
+	vertical-align:top;
+	padding:0;
+}
+
+#task_calendar th{
+	text-align:center;
+}
+
+#task_calendar tbody td{
+	border:1px solid #449;
+	width:14%;
+}
+
+#task_calendar tbody td div{
+	position:relative;
+	margin:.5em;
+	height:100%;
+	width:100%;
+	margin:0;
+}
+
+#task_calendar tbody td div .date{
+	display:block;
+	padding:0.25em;
+	left:0;
+	top:0;
+}
+
+#task_calendar tbody ul{
+	padding:0;
+	margin:1em .25em 0 .25em;
+}
+
+#task_calendar tbody ul li{
+	background:#333;
+	background:rgba(064,064,064,.25);
+	-moz-border-radius:.25em;
+	display:block;
+	border-radius:.25em;
+	padding:.2em;
+	margin:.2em 0;
+}
+
+.cal_nav .cal_prev{
+	display:block;
+	float:left;
+	clear:right;
+}
+
+.cal_nav .cal_next{
+	display:block;
+	float:right;
+	clear:left;
+}
+
+/* Friend request overlay */
+#num_requests, #side_num_requests{
+	-moz-border-radius:1.25em;
+	border-radius:1.25em;
+	padding:0 0.35em;
+	background:#900000;
+	position:absolute;
+	right:-0.75em;
+	color:#fff;
+	top:-0.5em;
+}
+
+/* Width and alignment styles for full-size screens */
+@media all and (min-width: 900px){
+	figure, nav{
+		vertical-align:top;
+		display:inline-block;
+	}
+	
+	header nav{
+		width:80%;
+	}
+
+	section, footer, nav{
+		border:0;
+	}
+	
+	dt{
+		text-align:right;
+		padding-right:0.5em;
+		vertical-align:middle;
+	}
+
+	dl dl{
+		margin-top:1em;
+	}
+
+	dl dl  > dt{
+		text-align:left;
+	}
+
+	aside, nav ul, nav .active, .fb, .err_wrap
+	{
+		border-radius:.5em;
+	}
+
+	section#pagination{
+		border-radius:5px;
+		margin-left:0.35%;
+	}
+	
+	#pagination strong{
+		letter-spacing:.5em;
+		margin-left:.5em;
+	}
+
+	table{
+		width:98%;
+		margin:1em;
+	}
+
+	dd{
+		margin:0;
+		width:85%;
+	}
+
+	dl{
+		margin:0;
+	}
+
+	.left, .right{
+		display:inline-block;
+		vertical-align:top;
+		background:transparent;
+	}
+	
+	.left{
+		border-radius:0;
+		text-align:left;
+		width:15%;
+	}
+	
+	#home .left{
+		width:74%;
+	}
+	
+	.left form{
+		width:100%;
+		margin:0 auto;
+	}
+	
+	.right{
+		border-bottom-left-radius:5px;
+		padding-top:0;
+		margin-left:.25%;
+		width:83%;
+		
+	}
+	
+	#home .right{
+		width:22%;
+	}
+	
+	dt{
+		width:13%;
+	}
+
+	#left_nav li{
+		display:block;
+	}
+	
+	fieldset dt, fieldset dd{
+		display:inline-block;
+		vertical-align:top;
+		margin:.5% 0;
+	}
+	
+	strong {
+		font-weight:bold;
+	}
+	
+	#task_view dt, th a{
+		font-weight:bold;
+	}
+	
+	.error{
+		font-weight:300;
+	}
+	
+	#task_comment_list dt{
+		width:25%;
+		padding:.5em;
+	}
+
+	#task_comment_list dd{
+		width:70%;
+		padding:.5em;
+	}
+	
+	.immediate, td.immediate, .overdue td{
+		font-weight:bold;
+		font-style:italic;
+	}
+	
+	.overdue td{
+		font-weight:bold;
+	}
+
+	#task_view dt, #task_view dd{
+		display:inline-block;
+		vertical-align:top;
+		margin:.5em auto;
+	}
+	
+	#home .right dt, #home .right dd{
+		width:45%;
+		display:inline-block;
+	}
+
+	#home .right dl{
+		padding-top:1em;
+	}
+
+	#tabs .ui-tabs-panel{
+		background:rgba(255,255,255,0.35);
+	}
+}
+
+#codeigniter_profiler {
+	margin: 1em 0;
+	border-radius:0.5em;
+}
+#codeigniter_profiler table {
+	margin:0;
+}

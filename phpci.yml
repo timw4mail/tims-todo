@@ -1,0 +1,25 @@
+build_settings:
+  verbose: true
+  ignore:
+    - "application/third_party"
+    - "web"
+    - "system"
+    - "third_party"
+    - "tests"
+
+setup:
+  env:
+    APPLICATION_ENV: "development"
+
+test:
+  php_unit:
+    config: 'tests/phpunit.xml'
+    run_from: 'tests'
+    coverage: '../web/coverage/'
+  php_mess_detector:
+    allowed_warnings: 10
+    rules:
+      - "unusedcode"
+      - "naming"
+  php_docblock_checker:
+  php_loc:
