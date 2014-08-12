@@ -10,18 +10,22 @@ build_settings:
     - "migrations"
 
 setup:
+  composer:
+    action: "install"
   env:
     APPLICATION_ENV: "development"
+  shell:
+    - "cd %BUILD_PATH% && vendor/bin/phinx rollback -e testing -t0"
+    - "cd %BUILD_PATH% && vendor/bin/phinx migrate -e testing"
 
 test:
   php_unit:
     config: 'tests/phpunit.xml'
     run_from: 'tests'
-    coverage: '../web/coverage/'
   php_mess_detector:
     allowed_warnings: 10
     rules:
       - "unusedcode"
       - "naming"
-  php_docblock_checker:
-  php_loc:
+#  php_docblock_checker:
+#  php_loc:

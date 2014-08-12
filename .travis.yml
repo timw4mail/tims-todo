@@ -1,0 +1,27 @@
+language: php
+
+php:
+  - 5.5
+  - 5.6
+  - hhvm
+
+install:
+  - composer install
+
+env:
+  - DB=mysql
+  - DB=pgsql
+
+before_script:
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS todo_test;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'create database todo_test;' -U postgres; fi"
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'create database IF NOT EXISTS todo_test;'; fi";
+
+script:
+  - vendor/bin/phinx migrate -e testing -c tests/phinx/$DB.yml
+  - mkdir -p build/logs
+  - cd tests && phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+    - wget https://scrutinizer-ci.com/ocular.phar
+    - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml

@@ -1,10 +1,10 @@
 <?php
 
 // Require base bootstrap file
-require_once('../application/third_party/CIUnit/bootstrap_phpunit.php');
+require_once(__DIR__ . '/../application/third_party/CIUnit/bootstrap_phpunit.php');
 
 // Require autoloader
-require_once('./env/autoloader.php');
+require_once(__DIR__ . '/env/autoloader.php');
 
 /**
  * Noop Controller
