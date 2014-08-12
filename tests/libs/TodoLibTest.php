@@ -4,10 +4,10 @@ class TodoLibTest extends Todo_TestCase {
 
 	protected $tables = [
 		'todo_priority' => 'todo_priority',
-		'todo_category' => 'todo_category',
 		'todo_user' => 'todo_user',
 		'todo_group' => 'todo_group',
 		'todo_category' => 'todo_category',
+		'todo_group_users_link' => 'todo_group_users_link',
 		'todo_user_friend_link' => 'todo_user_friend_link',
 	];
 
@@ -15,7 +15,6 @@ class TodoLibTest extends Todo_TestCase {
 	{
 		parent::setUp();
 		$this->CI->load->library('todo');
-		$this->dbfixt('todo_priority', 'todo_category');
 	}
 
 	public function testGetUserFromId()
@@ -357,7 +356,7 @@ class TodoLibTest extends Todo_TestCase {
 			[
 				'user_id' => 1,
 				'expected' => []
-			],/*[
+			],[
 				'user_id' => 3,
 				'expected' => [
 					array (
@@ -365,7 +364,7 @@ class TodoLibTest extends Todo_TestCase {
 						'name' => 'shared',
 					),
 				]
-			]*/
+			]
 		];
 	}
 
@@ -417,7 +416,6 @@ class TodoLibTest extends Todo_TestCase {
 
 	public function testGetFriendsInGroup()
 	{
-$this->markTestSkipped();
 		$expected = [
 			array (
 				'user_id' => '7',
@@ -547,10 +545,10 @@ $this->markTestSkipped();
 	public function dataGetGroupSelect()
 	{
 		return [
-			/*[
+			[
 				'user_id' => 3,
 				'expected' => T4 . '<option value="62">shared</option>' . NL
-			],*/
+			],
 			[
 				'user_id' => 1,
 				'expected' => ''

@@ -43,6 +43,9 @@ class InitialMigration extends AbstractMigration {
 			$this->table('todo_group')
 				->addColumn('name', 'string', ['limit' => 128])
 				->create();
+
+			// Seed data
+			$this->execute("INSERT INTO todo_group VALUES (0, 'global');");
 		}
 
 		// Category table
@@ -54,6 +57,15 @@ class InitialMigration extends AbstractMigration {
 				->addColumn('group_id', 'integer', ['default' => 0])
 				->addForeignKey('group_id', 'todo_group', 'id')
 				->create();
+
+			// Seed the data
+			$this->execute("
+				INSERT INTO todo_category VALUES (1, 'Work', 'Tasks related to work', 0);
+				INSERT INTO todo_category VALUES (7, 'Optional ', 'Tasks that are not necessary, but it would be nice to see them completed.', 0);
+				INSERT INTO todo_category VALUES (10, 'School', 'School related tasks', 0);
+				INSERT INTO todo_category VALUES (11, 'Other', 'Tasks that don''t fit in another category.', 0);
+				INSERT INTO todo_category VALUES (13, 'Personal', 'Personal tasks to do', 0);
+			");
 		}
 
 		// Priority list table
@@ -62,6 +74,19 @@ class InitialMigration extends AbstractMigration {
 			$this->table('todo_priority')
 				->addColumn('value', 'string')
 				->create();
+
+			// Seed the data
+			$this->execute("
+				INSERT INTO todo_priority VALUES (1, 'Optional');
+				INSERT INTO todo_priority VALUES (2, 'Lowest');
+				INSERT INTO todo_priority VALUES (3, 'Lower');
+				INSERT INTO todo_priority VALUES (4, 'Low');
+				INSERT INTO todo_priority VALUES (5, 'Normal');
+				INSERT INTO todo_priority VALUES (6, 'High');
+				INSERT INTO todo_priority VALUES (7, 'Higher');
+				INSERT INTO todo_priority VALUES (8, 'Highest');
+				INSERT INTO todo_priority VALUES (9, 'Immediate');
+			");
 		}
 
 		// Status list table
@@ -70,6 +95,15 @@ class InitialMigration extends AbstractMigration {
 			$this->table('todo_status')
 				->addColumn('value', 'string')
 				->create();
+
+			// Seed the data
+			$this->execute("
+				INSERT INTO todo_status VALUES (3, 'In Progress');
+				INSERT INTO todo_status VALUES (4, 'On Hold');
+				INSERT INTO todo_status VALUES (5, 'Canceled');
+				INSERT INTO todo_status VALUES (2, 'Completed');
+				INSERT INTO todo_status VALUES (1, 'Created');
+			");
 		}
 
 		// Task table
