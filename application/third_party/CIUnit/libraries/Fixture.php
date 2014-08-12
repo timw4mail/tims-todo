@@ -31,7 +31,7 @@ class Fixture {
 		
 		// $fixt is supposed to be an associative array
 		// E.g. outputted by spyc from reading a YAML file
-		$this->CI->db->simple_query('truncate table ' . $table . ';');
+		$this->CI->db->simple_query('TRUNCATE TABLE ' . $table . ' CASCADE;');
 
 		if ( ! empty($fixt))
 		{

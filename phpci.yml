@@ -6,6 +6,8 @@ build_settings:
     - "system"
     - "third_party"
     - "tests"
+    - "vendor"
+    - "migrations"
 
 setup:
   env:

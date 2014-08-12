@@ -1,6 +1,6 @@
 <?php $this->load->view('task/side_nav'); ?>
 <section id="task_add" class="right">
-	<form action="<?= site_url('category/edit_sub');?>" method="post">
+	<?= form_open('category/edit_sub'); ?>
 		<fieldset>
 			<legend>Edit Category</legend>
 			<dl>

@@ -75,12 +75,11 @@ class Login extends MY_Controller {
 		{
 			if($this->form_validation->run('login/register') === TRUE)
 			{
-				$res = $this->todo->add_reg();
-
-				if ($res == 1)
+				if ($this->todo->add_reg())
 				{
 					//Redirect to index
 					$this->todo->redirect_303('login');
+					return;
 				}
 				show_error("Error saving registration");
 			}

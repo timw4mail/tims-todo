@@ -3,8 +3,10 @@
 class FriendModelTest extends Todo_TestCase {
 
 	protected $tables = array(
-		'todo_item' => 'todo_item',
+		'todo_status' => 'todo_status',
 		'todo_group' => 'todo_group',
+		'todo_category' => 'todo_category',
+		'todo_item' => 'todo_item',
 		'todo_user_friend_link' => 'todo_user_friend_link',
 		'todo_group_users_link' => 'todo_group_users_link'
 	);
