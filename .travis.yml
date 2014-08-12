@@ -9,8 +9,8 @@ install:
   - composer install
 
 env:
-  - DB=mysql
-  - DB=pgsql
+  - DB=mysql, ENVIRONMENT=testing-mysql
+  - DB=pgsql, ENVIRONMENT=testing-pgsql
 
 before_script:
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS todo_test;' -U postgres; fi"
@@ -26,3 +26,11 @@ script:
 after_script:
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+
+matrix:
+  exclude:
+    - php: hhvm
+      env: DB=pgsql, ENVIRONMENT=testing-pgsql
+  allow_failures:
+    - php: hhvm
+  fast_finish: true
