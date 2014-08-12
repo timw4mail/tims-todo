@@ -9,8 +9,8 @@ install:
   - composer install
 
 env:
-  - DB=mysql, ENVIRONMENT=testing-mysql
-  - DB=pgsql, ENVIRONMENT=testing-pgsql
+  - DB=mysql
+  - DB=pgsql
 
 before_script:
   - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'DROP DATABASE IF EXISTS todo_test;' -U postgres; fi"
@@ -30,7 +30,7 @@ after_script:
 matrix:
   exclude:
     - php: hhvm
-      env: DB=pgsql, ENVIRONMENT=testing-pgsql
+      env: DB=pgsql
   allow_failures:
     - php: hhvm
   fast_finish: true
