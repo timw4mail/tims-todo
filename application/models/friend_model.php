@@ -29,7 +29,7 @@ class Friend_model extends CI_Model {
 		$friends = $this->db
 			->select('user_friend_id,user_friend_link.user_id as uid,user.username,user.email')
 			->from('todo_user_friend_link')
-			->join('user', 'user.id=user_friend_link.user_friend_id OR "todo_user"."id"="todo_user_friend_link"."user_id"', 'inner')
+			->join('user', 'user.id=user_friend_link.user_friend_id OR todo_user.id=todo_user_friend_link.user_id', 'inner')
 
 			->group_start()
 			->where_in('todo_user_friend_link.user_id', $user_id)

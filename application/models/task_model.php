@@ -116,7 +116,7 @@ class Task_model extends CI_Model {
 	public function get_checklist($task_id)
 	{
 		//Get the checklist for the current task from the database
-		$chk = $this->db->select('id, task_id, "desc", is_checked')
+		$chk = $this->db->select('id, task_id, description, is_checked')
 			->from('checklist')
 			->where('task_id', $task_id)
 			->order_by('is_checked', 'asc')
@@ -138,35 +138,33 @@ class Task_model extends CI_Model {
 	public function add_checklist_item()
 	{
 		$task_id = (int)$this->input->post('task_id');
-		$desc = xss_clean($this->input->post('desc'));
+		$desc = $this->input->post('desc', TRUE);
 
 		//Check if the current item already exists.
-		$exists = $this->db->select('task_id, "desc"')
+		$exists = $this->db->select('task_id, description')
 			->from('checklist')
 			->where('task_id', $task_id)
-			->where('"desc"', $desc)
+			->where('description', $desc)
 			->get();
 
 		if($exists->num_rows() < 1)
 		{
 			//Insert the item
 			$this->db->set('task_id', $task_id)
-				->set('"desc"', $desc)
+				->set('description', $desc)
 				->insert('checklist');
 
 			//Return the row
-			$return = $this->db->select('id, task_id, "desc", is_checked')
+			$return = $this->db->select('id, task_id, description, is_checked')
 				->from('checklist')
 				->where('task_id', $task_id)
-				->where('"desc"', $desc)
+				->where('description', $desc)
 				->get();
 
 			return $return->row_array();
 		}
-		else
-		{
-			return FALSE;
-		}
+
+		return FALSE;
 	}
 
 	// --------------------------------------------------------------------------
@@ -235,6 +233,7 @@ class Task_model extends CI_Model {
 	 *
 	 * Retrieves the user's archived tasks from the database
 	 *
+	 * @param int $page
 	 * @param int $per_page
 	 * @return array
 	 */

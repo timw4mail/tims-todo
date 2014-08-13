@@ -1,5 +1,16 @@
 {
+	"name":"timw4mail/tims-todo",
+	"type":"project",
+	"license": "BSD-3-Clause",
+	"authors": [{
+		"name": "Timothy J. Warren",
+		"email": "tim@timshomepage.net",
+		"homepage": "https://timshomepage.net",
+		"role": "Developer"
+	}],
 	"require": {
-		"robmorgan/phinx": "*"
+		"php": ">=5.4",
+		"robmorgan/phinx": "*",
+		"ircmaxell/password-compat": "1.0.*"
 	}
 }

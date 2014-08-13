@@ -271,6 +271,7 @@ define('VIEWPATH', $view_folder);
  *
  * And away we go...
  */
+require_once '../vendor/autoload.php';
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */

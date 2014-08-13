@@ -1,12 +1,12 @@
 0:
     id: 18
     task_id: 97
-    desc: 'Share this task'
+    description: 'Share this task'
     is_checked: 1
 
 1:
     id: 136
     task_id: 97
-    desc: 'Allow un-sharing'
+    description: 'Allow un-sharing'
     is_checked: 1
 

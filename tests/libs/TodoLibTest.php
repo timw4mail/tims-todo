@@ -418,10 +418,10 @@ class TodoLibTest extends Todo_TestCase {
 	{
 		$expected = [
 			array (
-				'user_id' => '7',
+				'user_id' => '3',
 			),
 			array (
-				'user_id' => '3',
+				'user_id' => '7',
 			)
 		];
 		$actual = $this->CI->todo->get_friends_in_group(62);

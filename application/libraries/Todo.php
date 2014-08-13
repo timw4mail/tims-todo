@@ -424,6 +424,7 @@ class Todo {
 			->where('user_id', $user_id)
 			->where('name !=', $username)
 			->where('is_admin', 1)
+			->order_by('name')
 			->get();
 
 		return $groups->result_array();
@@ -510,7 +511,7 @@ class Todo {
 		$friends = $this->CI->db
 			->select('user_friend_id,user_friend_link.user_id as uid,user.username')
 			->from('todo_user_friend_link')
-			->join('user', 'user.id=user_friend_link.user_friend_id OR "todo_user"."id"="todo_user_friend_link"."user_id"', 'inner')
+			->join('user', 'user.id=user_friend_link.user_friend_id OR todo_user.id=todo_user_friend_link.user_id', 'inner')
 			->where('confirmed', FRIEND_CONFIRMED)
 			->where('username !=', $username)
 
@@ -541,6 +542,7 @@ class Todo {
 					->select('user_id')
 					->from('group_users_link')
 					->where('group_id', $group_id)
+					->order_by('user_id')
 					->get();
 
 		return $friends->result_array();
@@ -678,7 +680,7 @@ class Todo {
 	 * Kanji Num
 	 *
 	 * Converts arabic to chinese number
-	 * @param int $number
+	 * @param int $orig_number
 	 * @return string
 	 */
 	public function kanji_num($orig_number)

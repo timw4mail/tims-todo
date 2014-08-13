@@ -1,5 +1,8 @@
 <?php
 
+// Autoloader for password compat
+require_once(__DIR__ . '/../vendor/autoload.php');
+
 // Require base bootstrap file
 require_once(__DIR__ . '/../application/third_party/CIUnit/bootstrap_phpunit.php');
 

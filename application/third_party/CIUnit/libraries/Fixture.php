@@ -20,13 +20,6 @@ class Fixture {
 		{
 			exit('can\'t load fixture library class when not in test mode!');
 		}
-
-		// Turn off foreign key checks for mysql so test tables can be easily truncated
-		if (getenv('DB') === 'mysql')
-		{
-			$this->_assign_db();
-			$this->CI->db->simple_query('SET foreign_key_checks = 0;');
-		}
 	}
 
 	/**
@@ -87,6 +80,9 @@ class Fixture {
 
 	private function truncate($table)
 	{
+		// Turn off foreign key checks for mysql so test tables can be easily truncated
+		if (getenv('DB') === 'mysql') $this->CI->db->simple_query('SET foreign_key_checks = 0;');
+
 		$sql = 'TRUNCATE TABLE ' . $table;
 
 		if (getenv('DB') !== 'mysql')
@@ -94,7 +90,12 @@ class Fixture {
 			$sql .= ' CASCADE';
 		}
 
-		return $this->CI->db->simple_query($sql);
+		$res =  $this->CI->db->simple_query($sql);
+
+		// Reset foreign key checks
+		//if (getenv('DB') === 'mysql') $this->CI->db->simple_query('SET foreign_key_checks = 1;');
+
+		return $res;
 	}
 
 }

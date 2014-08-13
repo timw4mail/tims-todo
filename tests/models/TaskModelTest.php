@@ -427,7 +427,7 @@ class TaskModelTest extends Todo_TestCase {
 				'user_id' => '3',
 				'item_id' => '97',
 				'comment' => 'This is a test comment',
-				'time_posted' => '1405457296',
+				'time_posted' => '1405457299',
 				'email' => 'guest@timshomepage.net',
 				'status' => 'In Progress',
 			),
@@ -452,13 +452,13 @@ class TaskModelTest extends Todo_TestCase {
 			array (
 				'id' => '18',
 				'task_id' => '97',
-				'desc' => 'Share this task',
+				'description' => 'Share this task',
 				'is_checked' => '1',
 			),
 			array (
 				'id' => '136',
 				'task_id' => '97',
-				'desc' => 'Allow un-sharing',
+				'description' => 'Allow un-sharing',
 				'is_checked' => '1',
 			),
 		];
