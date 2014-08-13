@@ -55,7 +55,7 @@ class InitialMigration extends AbstractMigration {
 				->addColumn('title', 'string', ['limit' => 128])
 				->addColumn('description', 'text', ['null' => FALSE])
 				->addColumn('group_id', 'integer', ['default' => 0])
-				->addForeignKey('group_id', 'todo_group', 'id')
+				//->addForeignKey('group_id', 'todo_group', 'id')
 				->create();
 
 			// Seed the data

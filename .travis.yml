@@ -32,4 +32,5 @@ matrix:
       env: DB=pgsql
   allow_failures:
     - php: hhvm
+    - env: DB=mysql
   fast_finish: true
