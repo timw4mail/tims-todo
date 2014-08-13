@@ -32,7 +32,7 @@ exit;
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-	$env_part = (isset($_ENV['DB'])) ? $_ENV['DB'] : '';
+	$env_part = (getenv('DB')) ? getenv('DB') : '';
 	define('ENVIRONMENT', ( ! empty($env_part)) ? "testing-{$env_part}" : 'testing');
 /*
  *---------------------------------------------------------------
