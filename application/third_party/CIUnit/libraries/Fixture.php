@@ -24,6 +24,7 @@ class Fixture {
 		// Turn off foreign key checks for mysql so test tables can be easily truncated
 		if (getenv('DB') === 'mysql')
 		{
+			$this->_assign_db();
 			$this->CI->db->simple_query('SET foreign_key_checks = 0;');
 		}
 	}
