@@ -4,6 +4,8 @@ class FriendModelTest extends Todo_TestCase {
 
 	protected $tables = array(
 		'todo_status' => 'todo_status',
+		'todo_priority' => 'todo_priority',
+		'todo_user' => 'todo_user',
 		'todo_group' => 'todo_group',
 		'todo_category' => 'todo_category',
 		'todo_item' => 'todo_item',
@@ -16,13 +18,6 @@ class FriendModelTest extends Todo_TestCase {
 		parent::setUp();
 		$this->CI->load->model('friend_model');
 		$this->create_session();
-		// Reset database data for each test
-		$this->dbfixt(
-			'todo_user',
-			'todo_group',
-			'todo_group_users_link',
-			'todo_user_friend_link'
-		);
 	}
 
 	public function testGetFriends()

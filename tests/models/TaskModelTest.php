@@ -9,7 +9,9 @@ class TaskModelTest extends Todo_TestCase {
 	 */
 	protected $tables = array(
 		'todo_group' => 'todo_group',
+		'todo_status' => 'todo_status',
 		'todo_category' => 'todo_category',
+		'todo_priority' => 'todo_priority',
 		'todo_user' => 'todo_user',
 		'todo_item' => 'todo_item',
 		'todo_checklist' => 'todo_checklist',
@@ -18,7 +20,6 @@ class TaskModelTest extends Todo_TestCase {
 		'todo_group_task_link' => 'todo_group_task_link',
 		'todo_user_task_link' => 'todo_user_task_link',
 		'todo_reminder' => 'todo_reminder',
-
 	);
 
 	public function setUp()

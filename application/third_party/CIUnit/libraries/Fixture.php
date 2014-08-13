@@ -48,8 +48,8 @@ class Fixture {
 	{
 		$this->_assign_db();
 
-		$Q = TRUE;
-		//$Q = $this->CI->db->simple_query('truncate table ' . $table . ';');
+		//$Q = TRUE;
+		$Q = $this->CI->db->simple_query('TRUNCATE TABLE ' . $table . ' CASCADE;');
 		
 		if (!$Q) {
 			echo $this->CI->db->call_function('error', $this->CI->db->conn_id);
