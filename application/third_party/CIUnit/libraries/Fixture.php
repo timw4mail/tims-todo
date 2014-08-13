@@ -31,7 +31,7 @@ class Fixture {
 		
 		// $fixt is supposed to be an associative array
 		// E.g. outputted by spyc from reading a YAML file
-		$this->CI->db->simple_query('TRUNCATE TABLE ' . $table . ' CASCADE;');
+		$this->truncate($table);
 
 		if ( ! empty($fixt))
 		{
@@ -49,7 +49,7 @@ class Fixture {
 		$this->_assign_db();
 
 		//$Q = TRUE;
-		$Q = $this->CI->db->simple_query('TRUNCATE TABLE ' . $table . ' CASCADE;');
+		$Q = $this->truncate($table);
 		
 		if (!$Q) {
 			echo $this->CI->db->call_function('error', $this->CI->db->conn_id);
@@ -76,6 +76,18 @@ class Fixture {
 			die("\nSorry, the name of your test database must end on '_test'.\n".
 				"This prevents deleting important data by accident.\n");
 		}
+	}
+
+	private function truncate($table)
+	{
+		$sql = 'TRUNCATE TABLE ' . $table;
+
+		if (getenv('DB') !== 'mysql')
+		{
+			$sql .= ' CASCADE';
+		}
+
+		return $this->CI->db->simple_query($sql);
 	}
 
 }
