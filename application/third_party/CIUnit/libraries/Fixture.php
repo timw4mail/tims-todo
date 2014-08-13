@@ -20,6 +20,12 @@ class Fixture {
 		{
 			exit('can\'t load fixture library class when not in test mode!');
 		}
+
+		// Turn off foreign key checks for mysql so test tables can be easily truncated
+		if (getenv('DB') === 'mysql')
+		{
+			$this->CI->db->simple_query('SET foreign_key_checks = 0;');
+		}
 	}
 
 	/**
