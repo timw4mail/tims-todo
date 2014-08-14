@@ -28,7 +28,7 @@ class FriendModelTest extends Todo_TestCase {
 		]);
 
 		$expected = [
-			7 => array (
+			array (
 				'user_friend_id' => '1',
 				'uid' => '7',
 				'username' => 'timw4mail',
@@ -41,7 +41,7 @@ class FriendModelTest extends Todo_TestCase {
 			),
 		];
 		$actual = $this->CI->friend_model->get_friends();
-		$this->assertEquals($expected, $actual);
+		$this->assertEquals($expected, array_values($actual));
 
 		// Now test a lack of friends
 		$this->CI->session->set_userdata([

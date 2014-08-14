@@ -4,6 +4,7 @@ filter:
        - tests/*
        - vendor/*
        - application/third_party/*
+       - system/*
 
 imports:
     - php
