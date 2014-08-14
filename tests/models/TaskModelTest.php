@@ -514,20 +514,20 @@ class TaskModelTest extends Todo_TestCase {
 			'Don\'t pass status id' => [
 				'task_id' => 97,
 				'status_id' => NULL,
-				'expected' => T5 . '<option value="3" selected="selected">In Progress</option>'.  NL .
-					T5 . '<option value="4">On Hold</option>' .  NL .
-					T5 . '<option value="5">Canceled</option>' .  NL .
+				'expected' => 	T5 . '<option value="1">Created</option>' .  NL .
 					T5 . '<option value="2">Completed</option>' .  NL .
-					T5 . '<option value="1">Created</option>' .  NL
+					T5 . '<option value="3" selected="selected">In Progress</option>'.  NL .
+					T5 . '<option value="4">On Hold</option>' .  NL .
+					T5 . '<option value="5">Canceled</option>' .  NL
 			],
 			'Pass status id' => [
 				'task_id' => 155,
 				'status_id' => 5,
-				'expected' => T5. '<option value="3">In Progress</option>'.  NL .
-					T5 . '<option value="4">On Hold</option>' .  NL .
-					T5 . '<option value="5" selected="selected">Canceled</option>' .  NL .
+				'expected' => 	T5 . '<option value="1">Created</option>' .  NL .
 					T5 . '<option value="2">Completed</option>' .  NL .
-					T5 . '<option value="1">Created</option>' .  NL
+					T5. '<option value="3">In Progress</option>'.  NL .
+					T5 . '<option value="4">On Hold</option>' .  NL .
+					T5 . '<option value="5" selected="selected">Canceled</option>' .  NL
 			]
 		];
 	}
@@ -621,3 +621,4 @@ class TaskModelTest extends Todo_TestCase {
 		$this->assertEquals($expected, $actual);
 	}
 }
+// End of TaskModelTest.php

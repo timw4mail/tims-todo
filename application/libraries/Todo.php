@@ -304,7 +304,7 @@ class Todo {
 	public function validate_pass()
 	{
 		$err = array();
-		$user = $this->CI->session->userdata('uid');
+		$user = (int) $this->CI->session->userdata('uid');
 		$pass = $this->CI->input->post('pass');
 		$pass1 = $this->CI->input->post('pass1');
 		$old_pass = $this->CI->input->post('old_pass');
@@ -315,6 +315,7 @@ class Todo {
 		//Check for current password in the database
 		$user_check = $this->CI->db->select('password')
 				->from('user')
+				->where('id', $user)
 				->get();
 		
 		$row = $user_check->row();
@@ -663,14 +664,12 @@ class Todo {
 	{
 		$query = $this->CI->db->select('name')
 			->from('group')
-			->where('id', $group_id)
+			->where('id', (int) $group_id)
 			->get();
 
 		$qrow = $query->row();
 
-		$name = $qrow->name;
-
-		return $name;
+		return $qrow->name;
 	}
 
 

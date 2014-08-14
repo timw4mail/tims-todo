@@ -889,6 +889,7 @@ class Task_model extends CI_Model {
 		//Get the list of statuses
 		$query = $this->db->select('id, value as desc')
 				->from('status')
+				->order_by('id')
 				->get();
 
 		foreach($query->result() as $row)

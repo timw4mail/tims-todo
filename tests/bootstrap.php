@@ -17,6 +17,9 @@ class Welcome extends CIU_Controller {}
 
 /**
  * Base TestSuite
+ *
+ * @method bool assertEquals(mixed $expected, mixed $actual)
+ * @method bool assertNotEquals(mixed $expected, mixed $actual)
  */
 class Todo_TestCase extends CIUnit_TestCase {
 
