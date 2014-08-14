@@ -1,3 +1,10 @@
+filter:
+    excluded_paths:
+       - web/*
+       - tests/*
+       - vendor/*
+       - application/third_party/*
+
 imports:
     - php
 

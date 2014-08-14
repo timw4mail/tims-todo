@@ -14,9 +14,8 @@ setup:
     action: "install"
   env:
     APPLICATION_ENV: "development"
-  shell:
-    - "cd %BUILD_PATH% && vendor/bin/phinx rollback -e testing -t0"
-    - "cd %BUILD_PATH% && vendor/bin/phinx migrate -e testing"
+#  shell:
+#    - "cd %BUILD_PATH% && vendor/bin/phinx migrate -e testing"
 
 test:
   php_unit:
