@@ -38,7 +38,9 @@ class Login extends MY_Controller {
 	 */
 	public function do_login()
 	{
-		$data['err'] = array();
+		$data = [
+			'err' => array()
+		];
 
 		if($this->input->post('login_sub') != FALSE)
 		{

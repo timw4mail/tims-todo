@@ -58,6 +58,8 @@ class Calendar extends MY_Controller {
 
 		$local_time = time();
 
+		$data = array();
+
 		$data['month'] = $_months[(int)$month].' '.$year;
 		$data['calendar'] = array();
 		$data['today'] = getdate();

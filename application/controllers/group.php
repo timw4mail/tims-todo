@@ -29,7 +29,9 @@ class Group extends MY_Controller{
 	 */
 	public function group_list()
 	{
-		$data['group'] = $this->todo->get_group_list((int) $this->session->userdata('uid'));
+		$data = [
+			'group' => $this->todo->get_group_list((int) $this->session->userdata('uid'))
+		];
 		$this->page->set_title("Group List");
 		$this->page->build('friend/group_list', $data);
 	}
@@ -83,6 +85,7 @@ class Group extends MY_Controller{
 			$friends_array[] = $a['user_id'];
 		}
 
+		$data = array();
 		$data['group_name'] = $this->todo->get_group_name_by_id($group_id);
 		$data['friends'] = $this->todo->get_friend_list();
 		$data['selected_friends'] = $friends_array;

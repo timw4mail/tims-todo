@@ -36,6 +36,8 @@ class Task extends MY_Controller {
 	{
 		$this->page->set_title("Shared Tasks");
 		$tasks = $this->task_model->get_shared_task_list();
+
+		$data = array();
 		$data['task_list'] = $tasks;
 		$data['list_type'] = "shared";
 
@@ -51,6 +53,8 @@ class Task extends MY_Controller {
 	{
 		$this->page->set_title("View Tasks");
 		$tasks = $this->task_model->get_task_list();
+
+		$data = array();
 		$data['task_list'] = $tasks;
 		$data['list_type'] = 'active';
 
@@ -84,6 +88,7 @@ class Task extends MY_Controller {
 
 		$this->pagination->initialize($config);
 
+		$data = array();
 		$data['task_list'] = $tasks;
 		$data['list_type'] = 'archived';
 		$data['pagination'] = $this->pagination->create_links();
@@ -100,6 +105,8 @@ class Task extends MY_Controller {
 	{
 		$this->page->set_title("Overdue Tasks");
 		$tasks = $this->task_model->get_overdue_task_list();
+
+		$data = array();
 		$data['task_list'] = $tasks;
 		$data['list_type'] = 'overdue';
 
@@ -272,8 +279,10 @@ class Task extends MY_Controller {
 	 */
 	public function get_task_comments()
 	{
-		$task_id = $this->input->get('task_id');
-		$data['comments'] = $this->task_model->get_task_comments($task_id);
+		$task_id = (int) $this->input->get('task_id');
+		$data = [
+			'comments' => $this->task_model->get_task_comments($task_id)
+		];
 		$this->load->view('task/comments_view', $data);
 	}
 

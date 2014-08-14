@@ -13,7 +13,6 @@ class Category extends MY_Controller {
 		parent::__construct();
 		$this->page->set_foot_js_group('js');
 		$this->page->set_title('Categories');
-
 	}
 
 	/**
@@ -29,7 +28,9 @@ class Category extends MY_Controller {
 	 */
 	public function category_list()
 	{
-		$data['category'] = $this->todo->get_category_list();
+		$data = [
+			'category' => $this->todo->get_category_list()
+		];
 		$this->page->set_title("Category List");
 		$this->page->build('task/cat_list', $data);
 	}
@@ -51,7 +52,9 @@ class Category extends MY_Controller {
 	 */
 	public function edit($cat_id)
 	{
-		$data['cat'] = $this->todo->get_category((int) $cat_id);
+		$data = [
+			'cat' => $this->todo->get_category((int) $cat_id)
+		];
 		$this->page->set_title("Edit Category");
 		$this->page->build('task/cat_add', $data);
 	}

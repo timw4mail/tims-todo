@@ -32,8 +32,9 @@ class Friend extends MY_Controller {
 	 */
 	public function friend_list()
 	{
-		$data = array();
-		$data['friend_list'] = $this->friend_model->get_friends();
+		$data = [
+			'friend_list' => $this->friend_model->get_friends()
+		];
 		$this->page->set_title('Friends List');
 		$this->page->build('friend/list', $data);
 	}
@@ -43,7 +44,9 @@ class Friend extends MY_Controller {
 	 */
 	public function find()
 	{
-		$data['results'] = null;
+		$data = [
+			'results' => NULL
+		];
 		$this->page->set_title('Find Friends');
 		$this->page->build('friend/search', $data);
 	}
@@ -62,7 +65,7 @@ class Friend extends MY_Controller {
 	 */
 	public function accept_request()
 	{
-		$aid = xss_clean($this->input->post('aid'));
+		$aid = $this->input->post('aid', TRUE);
 		$this->output->set_output($this->friend_model->accept_request($aid));
 	}
 
@@ -71,7 +74,7 @@ class Friend extends MY_Controller {
 	 */
 	public function reject_request()
 	{
-		$rid = xss_clean($this->input->post('rid'));
+		$rid = $this->input->post('rid', TRUE);
 		$this->output->set_output($this->friend_model->reject_request($rid));
 	}
 
@@ -80,7 +83,9 @@ class Friend extends MY_Controller {
 	 */
 	public function requests()
 	{
-		$data['request_list'] = $this->friend_model->get_requests();
+		$data = [
+			'request_list' =>  $this->friend_model->get_requests()
+		];
 		$this->page->set_title('Friend Reqests');
 		$this->page->build('friend/requests', $data);
 	}
@@ -90,7 +95,9 @@ class Friend extends MY_Controller {
 	 */
 	public function ajax_search()
 	{
-		$data['results'] = $this->friend_model->find_friends();
+		$data = [
+			'results' => $this->friend_model->find_friends()
+		];
 		$this->load->view('friend/ajax_search', $data);
 	}
 	

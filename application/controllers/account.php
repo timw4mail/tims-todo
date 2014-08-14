@@ -51,7 +51,9 @@ class Account extends MY_Controller {
 			}
 			else
 			{
-				$data['err'] = $val;
+				$data = [
+					'err' => $val
+				];
 				$this->page->build('account/password', $data);
 			}
 		}

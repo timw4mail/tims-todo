@@ -287,6 +287,7 @@ class Page {
 	 */
 	public function set_message($type, $message, $return = FALSE)
 	{
+		$data = array();
 		$data['stat_type'] = $type;
 		$data['message'] = $message;
 
