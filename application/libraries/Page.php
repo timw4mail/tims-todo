@@ -241,7 +241,7 @@ class Page {
 	 *
 	 * Helper function for making script tags
 	 *
-	 * @param string $js
+	 * @param string $javascript
 	 * @param bool $domain
 	 * @return string
 	 */

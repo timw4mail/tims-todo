@@ -7,7 +7,7 @@
  */
 class Todo {
 
-	private $user, $pass, $email, $CI, $uid; //For user registration
+	private $user, $pass, $CI, $uid; //For user registration
 
 	/**
 	 * Constructor

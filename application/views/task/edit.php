@@ -100,7 +100,7 @@
 					<input type="radio" name="share_type" value="group" id="group_share" <?= (empty($selected_groups)) ? "": 'checked="checked"' ?> />
 				</dd>
 				<?php if( ! empty($friends)): ?>
-				<?php if($selected_friends === FALSE) {$selected_friends = array();} ?>
+				<?php if( ! is_array($selected_friends)) {$selected_friends = array();} ?>
 				<dt class="friend_share"><strong>Friend Settings</strong></dt>
 				<dd class="friend_share">
 					<dl>
