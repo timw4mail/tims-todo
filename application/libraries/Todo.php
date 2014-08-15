@@ -386,7 +386,7 @@ class Todo {
 			->where('id', $uid)
 			->update('user');
 
-		return ($this->db->affected_rows == 1);
+		return ($this->CI->db->affected_rows == 1);
 	}
 
 	// --------------------------------------------------------------------------
