@@ -382,7 +382,7 @@ class Todo {
 	 */
 	public function set_timezone($uid, $timezone)
 	{
-		$this->db->set('timezone', $timezone)
+		$this->CI->db->set('timezone', $timezone)
 			->where('id', $uid)
 			->update('user');
 
