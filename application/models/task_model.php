@@ -401,49 +401,18 @@ class Task_model extends CI_Model {
 		// Clear previous validations
 		$this->form_vals = NULL;
 
-		$title = $this->input->post('title', TRUE);
-		$desc = $this->input->post('desc', TRUE);
-		$category = (int) $this->input->post('category');
-		$priority = (int) $this->input->post('priority');
 		$due = $this->input->post('due', TRUE);
 		$due_hour = $this->input->post('due_hour', TRUE);
 		$due_minute = $this->input->post('due_minute', TRUE);
-		$status = ($this->input->post('status') == FALSE) ? 1 : $this->input->post('status');
-		$created = time();
 
 		$err = array();
 
-		//Check title
-		if(strlen($title) < 1)
-		{
-			$err[] = "You must give the task a title";
-		}
-		else
-		{
-			//Return form values
-			$this->form_vals['title'] = $title;
-		}
+		// Basic validation
+		$valid = $this->form_validation->run('task');
 
-		//Check description
-		if(strlen($desc) < 1)
+		if ( ! $valid)
 		{
-			$err[] = "The task must have a description";
-		}
-		else
-		{
-			//Return form values
-			$this->form_vals['description'] = $desc;
-		}
-
-		//Check task category
-		if((int)$category < 1)
-		{
-			$err[] = "Select a task category";
-		}
-		else
-		{
-			//Return form values
-			$this->form_vals['category'] = $category;
+			$err = array_merge($err, $this->form_validation->get_error_array());
 		}
 
 		//Check due date
@@ -452,10 +421,8 @@ class Task_model extends CI_Model {
 			//Verify date format
 			$valid = $this->validation_callbacks->due_date($due);
 
-
 			if ( ! $valid)
 			{
-				$err[] = "You must enter a due date in YYYY-MM-DD format.";
 				return $err;
 			}
 
@@ -537,12 +504,6 @@ class Task_model extends CI_Model {
 			$this->groups = ( ! empty($groups)) ? $groups : FALSE;
 			$this->friends = ( ! empty($friends)) ? $friends : FALSE;
 			$this->share_type = $share_type;
-			$this->title = $title;
-			$this->description = $desc;
-			$this->category = $category;
-			$this->priority = $priority;
-			$this->status = $status;
-			$this->created = $created;
 			$this->due = $due_timestamp;
 			$this->friend_perms = (isset($friend_perms)) ? $friend_perms : FALSE;
 			$this->group_perms = (isset($group_perms)) ? $group_perms : FALSE;
@@ -569,12 +530,19 @@ class Task_model extends CI_Model {
 	 */
 	public function add_task()
 	{
-		$title = $this->title;
+		$title = $this->input->post('title', TRUE);
+		$desc = $this->input->post('desc', TRUE);
+		$category = (int) $this->input->post('category');
+		$priority = (int) $this->input->post('priority');
+		$status = ($this->input->post('status') == FALSE) ? 1 : $this->input->post('status');
+		$created = time();
+
+		/*$title = $this->title;
 		$desc = $this->description;
 		$category = $this->category;
 		$priority = $this->priority;
 		$status = $this->status;
-		$created = $this->created;
+		$created = $this->created;*/
 		$due = $this->due;
 		$uid = $this->user_id;
 

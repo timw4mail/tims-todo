@@ -57,5 +57,23 @@ class Validation_callbacks {
 
 		return $valid;
 	}
+
+	/**
+	 * Verify that a reminder has a valid due date
+	 *
+	 * @param string $date
+	 * @return bool
+	 */
+	public function reminder_due($date)
+	{
+		$has_date = ($date != '0');
+
+		if ( ! $has_date)
+		{
+			$this->CI->form_validation->set_message('validate', 'You must set a due date in order to get a reminder.');
+		}
+
+		return $has_date;
+	}
 }
 // End of libraries/Validation_callbacks.php

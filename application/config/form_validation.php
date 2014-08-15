@@ -24,12 +24,12 @@ $config = [
 		[
 			'field' => 'due_hour',
 			'label' => 'Due Hour',
-			'rules' => 'min_length[1]|less_than[24]|is_natural'
+			'rules' => 'less_than[24]|is_natural'
 		],
 		[
 			'field' => 'due_minute',
 			'label' => 'Due Minute',
-			'rules' => 'min_length[1]|less_than[61]|is_natural'
+			'rules' => 'less_than[61]|is_natural'
 		],
 		[
 			'field' => 'due',
