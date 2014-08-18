@@ -31,7 +31,7 @@ class Validation_callbacks {
 		//Verify date format
 		$date_pattern = '/(20|1[0-9])[0-9]{2}\-(1[0-2]|0[1-9])\-(3[0-1]|2[0-8]|1[0-9]|0[1-9])/';
 
-		if ( ! (bool) preg_match($date_pattern, $due))
+		if ( ! (bool) preg_match($date_pattern, $due) && $due != 0)
 		{
 			$this->CI->form_validation->set_message('validate', 'You must enter a due date in YYYY-MM-DD format.');
 			return FALSE;

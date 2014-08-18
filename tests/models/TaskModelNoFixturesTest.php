@@ -22,7 +22,7 @@ class TaskModelNoFixturesTest extends Todo_TestCase {
 					'The Description field is required.',
 					'The Category field is required.',
 					'The Priority field is required.',
-					'You must enter a due date in YYYY-MM-DD format.',
+					//'You must enter a due date in YYYY-MM-DD format.',
 					'You must set a due date in order to get a reminder.',
 					'You must put numeric hours and minutes for a reminder time.'
 				]

@@ -411,7 +411,7 @@ class Task_model extends CI_Model {
 
 		if ( ! $valid)
 		{
-			$err = array_merge($err, $this->form_validation->get_error_array());
+			$err = array_merge($err, (array)$this->form_validation->get_error_array());
 		}
 
 		//Check due date

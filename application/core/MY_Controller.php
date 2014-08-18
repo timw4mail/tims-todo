@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller {
 	public $session;
 
 	/**
-	 * @var CI_DB_query_builder
+	 * @var CI_DB_driver
 	 */
 	public $db;
 

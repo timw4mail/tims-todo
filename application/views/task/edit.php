@@ -11,12 +11,12 @@
 			<dl>
 				<dt><label for="title">Title</label></dt>
 				<dd>
-					<input type="text" name="title" id="title" value="<?= $title ?>" placeholder="Task Heading" />
+					<input type="text" name="title" id="title" value="<?= set_value('title') ?>" placeholder="Task Heading" />
 				</dd>
 
 				<dt><label for="desc">Description</label></dt>
 				<dd>
-					<textarea rows="10" cols="80" name="desc" id="desc" placeholder="Task details"><?= $description ?></textarea>
+					<textarea rows="10" cols="80" name="desc" id="desc" placeholder="Task details"><?= set_value('description') ?></textarea>
 				</dd>
 
 				<dt><label for="category">Category</label></dt>
