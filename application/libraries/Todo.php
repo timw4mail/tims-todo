@@ -7,7 +7,12 @@
  */
 class Todo {
 
-	private $user, $pass, $CI, $uid; //For user registration
+	private $user, $pass, $uid; //For user registration
+
+	/**
+	 * @var MY_Controller
+	 */
+	protected $CI;
 
 	/**
 	 * Constructor

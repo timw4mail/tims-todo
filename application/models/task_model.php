@@ -6,7 +6,7 @@
  */
 class Task_model extends CI_Model {
 
-	private $title, $description, $category, $priority, $due, $created,
+	private $title, $description, $category, $priority, $due,
 			$status, $user_id, $task_id, $reminder, $reminder_time,
 			$groups, $group_perms, $friends, $friend_perms, $share_type;
 
@@ -110,7 +110,7 @@ class Task_model extends CI_Model {
 	 * Get Checklist
 	 *
 	 * Returns Checklist for current task
-	 * @param int task_id
+	 * @param int $task_id
 	 * @return array
 	 */
 	public function get_checklist($task_id)
@@ -212,7 +212,7 @@ class Task_model extends CI_Model {
 
 		$res = $this->db->get();
 
-		if($res->num_rows()==0) return;
+		if($res->num_rows()==0) return NULL;
 
 		$result_array = array();
 		$i=1;
@@ -259,8 +259,7 @@ class Task_model extends CI_Model {
 
 		$res = $this->db->get();
 
-		if($res->num_rows()==0)
-			return;
+		if($res->num_rows()==0) return NULL;
 
 		$result_array = array();
 		$i=1;
@@ -294,7 +293,7 @@ class Task_model extends CI_Model {
 			->join('category', 'category.id=item.category_id', 'inner')
 			->join('priority', 'priority.id=item.priority', 'inner')
 			->join('status', 'status.id=item.status', 'inner')
-			->where('user_id', (int)$this->session->userdata('uid'))
+			->where('user_id', (int) $this->session->userdata('uid'))
 
 			->group_start()
 			->where('due <', time())
@@ -309,7 +308,7 @@ class Task_model extends CI_Model {
 		$res = $this->db->get();
 
 		if($res->num_rows()==0)
-			return;
+			return NULL;
 
 		$result_array = array();
 		$i=1;
@@ -728,7 +727,7 @@ class Task_model extends CI_Model {
 	/**
 	 * Get Task By Id
 	 *
-	 * Retreives task from database by task id
+	 * Retrieves task from database by task id
 	 * @param int $task_id
 	 * @return array
 	 */
@@ -923,7 +922,7 @@ class Task_model extends CI_Model {
 	 * Get Category Select
 	 *
 	 * Returns category options for task status
-	 * @param int $id
+	 * @param int $task_id
 	 * @return string
 	 */
 	public function get_category_select($task_id=0)
@@ -1192,9 +1191,10 @@ class Task_model extends CI_Model {
 	 * Updates a checklist
 	 *
 	 * @param int $check_id
-	 * @param bit $checked
+	 * @param int $checked
+	 * @return int
 	 */
-	public function update_checklist($check_id,  $checked)
+	public function update_checklist($check_id, $checked)
 	{
 		$task_id = $this->input->post('task_id');
 
@@ -1393,7 +1393,7 @@ class Task_model extends CI_Model {
 	 * Get Task Perms
 	 *
 	 * Get the permissions of the current task
-	 * @param int $id
+	 * @param int $task_id
 	 * @return array
 	 */
 	private function _get_task_perms($task_id)
@@ -1513,12 +1513,12 @@ class Task_model extends CI_Model {
 			if($result_array['user_perms'] == PERM_NO_ACCESS)
 			{
 				show_error('You do not have permission to view this task.');
-				return;
+				return NULL;
 			}
 			else if($result_array['user_perms'] < PERM_WRITE_ACCESS && $this->uri->segment('2') == "edit")
 			{
 				show_error('You do not have permission to edit this task.');
-				return;
+				return NULL;
 			}
 
 			return $result_array;
@@ -1563,3 +1563,4 @@ class Task_model extends CI_Model {
 		$this->todo->redirect_303(site_url('task/list'));
 	}
 }
+// End of task_model.php

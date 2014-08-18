@@ -6,12 +6,44 @@
 class MY_Controller extends CI_Controller {
 
 	/**
-	 * Constructor
+	 * @var MY_Session
 	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
+	public $session;
+
+	/**
+	 * @var CI_DB_query_builder
+	 */
+	public $db;
+
+	/**
+	 * @var CI_Input
+	 */
+	public $input;
+
+	/**
+	 * @var CI_Uri
+	 */
+	public $uri;
+
+	/**
+	 * @var MY_Form_validation
+	 */
+	public $form_validation;
+
+	/**
+	 * @var Validation_Callbacks
+	 */
+	public $validation_callbacks;
+
+	/**
+	 * @var CI_Output
+	 */
+	public $output;
+
+	/**
+	 * @var Page
+	 */
+	public $page;
 
 	// --------------------------------------------------------------------------
 
