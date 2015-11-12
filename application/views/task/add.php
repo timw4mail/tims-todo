@@ -35,16 +35,16 @@
 					<input type="text" name="due" id="due" value="<?= date('Y-m-d', $due) ?>" placeholder="YYYY-MM-DD" size="10" />
 					<label>Hour:
 						<select name="due_hour">
-							<option value="00"<?= (date('H', $due) == 00) ? ' selected="selected"' : "" ?>>Midnight</option>
-							<option value="01"<?= (date('H', $due) == 01) ? ' selected="selected"' : "" ?>>1 AM</option>
-							<option value="02"<?= (date('H', $due) == 02) ? ' selected="selected"' : "" ?>>2 AM</option>
-							<option value="03"<?= (date('H', $due) == 03) ? ' selected="selected"' : "" ?>>3 AM</option>
-							<option value="04"<?= (date('H', $due) == 04) ? ' selected="selected"' : "" ?>>4 AM</option>
-							<option value="05"<?= (date('H', $due) == 05) ? ' selected="selected"' : "" ?>>5 AM</option>
-							<option value="06"<?= (date('H', $due) == 06) ? ' selected="selected"' : "" ?>>6 AM</option>
-							<option value="07"<?= (date('H', $due) == 07) ? ' selected="selected"' : "" ?>>7 AM</option>
-							<option value="08"<?= (date('H', $due) == 08) ? ' selected="selected"' : "" ?>>8 AM</option>
-							<option value="09"<?= (date('H', $due) == 09) ? ' selected="selected"' : "" ?>>9 AM</option>
+							<option value="00"<?= (date('H', $due) == 0) ? ' selected="selected"' : "" ?>>Midnight</option>
+							<option value="01"<?= (date('H', $due) == 1) ? ' selected="selected"' : "" ?>>1 AM</option>
+							<option value="02"<?= (date('H', $due) == 2) ? ' selected="selected"' : "" ?>>2 AM</option>
+							<option value="03"<?= (date('H', $due) == 3) ? ' selected="selected"' : "" ?>>3 AM</option>
+							<option value="04"<?= (date('H', $due) == 4) ? ' selected="selected"' : "" ?>>4 AM</option>
+							<option value="05"<?= (date('H', $due) == 5) ? ' selected="selected"' : "" ?>>5 AM</option>
+							<option value="06"<?= (date('H', $due) == 6) ? ' selected="selected"' : "" ?>>6 AM</option>
+							<option value="07"<?= (date('H', $due) == 7) ? ' selected="selected"' : "" ?>>7 AM</option>
+							<option value="08"<?= (date('H', $due) == 8) ? ' selected="selected"' : "" ?>>8 AM</option>
+							<option value="09"<?= (date('H', $due) == 9) ? ' selected="selected"' : "" ?>>9 AM</option>
 							<option value="10"<?= (date('H', $due) == 10) ? ' selected="selected"' : "" ?>>10 AM</option>
 							<option value="11"<?= (date('H', $due) == 11) ? ' selected="selected"' : "" ?>>11 AM</option>
 							<option value="12"<?= (date('H', $due) == 12) ? ' selected="selected"' : "" ?>>12 Noon</option>

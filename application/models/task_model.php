@@ -186,14 +186,9 @@ class Task_model extends CI_Model {
 			->where('user_id', $uid)
 			->delete('item_comments');
 
-		if($this->db->affected_rows() > 0)
-		{
-			return $this->db->affected_rows();
-		}
-		else
-		{
-			return -1;
-		}
+		return ($this->db->affected_rows() > 0)
+			? $this->db->affected_rows()
+			: -1;
 	}
 
 	// --------------------------------------------------------------------------
@@ -317,7 +312,7 @@ class Task_model extends CI_Model {
 			$result_array[$i] = $row;
 
 			// Overdue is set as false to cut down on visual noise.
-			// Since every task in the list is overdue, using the 
+			// Since every task in the list is overdue, using the
 			// visual style is redundant
 			$result_array[$i]['overdue'] = FALSE;
 			$i++;
@@ -616,12 +611,12 @@ class Task_model extends CI_Model {
 	 */
 	public function update_task()
 	{
-		$title = $this->title;
-		$desc = str_replace('<br>', '<br />', $this->description);
-		$category = $this->category;
-		$priority = $this->priority;
-		$status = $this->status;
-		$due = $this->due;
+		$title = $this->input->post('title');;
+		$desc = str_replace('<br>', '<br />', $this->input->post('desc'));
+		$category = $this->input->post('category');
+		$priority = $this->input->post('priority');
+		$status = $this->input->post('status');
+		$due = $this->input->post('due');
 		$uid = $this->user_id;
 		$task_id = $this->task_id;
 
@@ -1161,17 +1156,7 @@ class Task_model extends CI_Model {
 
 
 		//Check if the user has permission
-		if($admin === TRUE)
-		{
-			$this->_remove_task($task_id);
-			return;
-		}
-		else if($user_admin === TRUE)
-		{
-			$this->_remove_task($task_id);
-			return;
-		}
-		else if($group_admin === TRUE)
+		if($admin === TRUE || $user_admin === TRUE || $group_admin === TRUE)
 		{
 			$this->_remove_task($task_id);
 			return;

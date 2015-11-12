@@ -175,7 +175,7 @@ section{
 
 
 
-input[type="submit"], input[type="button"]{
+input[type="submit"], input[type="button"], button{
 	background:url('/images/bgs/Title.png');
 	color:#fff;
 	padding:0.5em;
@@ -601,7 +601,7 @@ select#friends option{
 		vertical-align:top;
 		display:inline-block;
 	}
-	
+
 	header nav{
 		width:80%;
 	}
@@ -609,7 +609,7 @@ select#friends option{
 	section, footer, nav{
 		border:0;
 	}
-	
+
 	dt{
 		text-align:right;
 		padding-right:0.5em;
@@ -633,7 +633,7 @@ select#friends option{
 		border-radius:5px;
 		margin-left:0.35%;
 	}
-	
+
 	#pagination strong{
 		letter-spacing:.5em;
 		margin-left:.5em;
@@ -658,34 +658,34 @@ select#friends option{
 		vertical-align:top;
 		background:transparent;
 	}
-	
+
 	.left{
 		border-radius:0;
 		text-align:left;
 		width:15%;
 	}
-	
+
 	#home .left{
 		width:74%;
 	}
-	
+
 	.left form{
 		width:100%;
 		margin:0 auto;
 	}
-	
+
 	.right{
 		border-bottom-left-radius:5px;
 		padding-top:0;
 		margin-left:.25%;
 		width:83%;
-		
+
 	}
-	
+
 	#home .right{
 		width:22%;
 	}
-	
+
 	dt{
 		width:13%;
 	}
@@ -693,25 +693,25 @@ select#friends option{
 	#left_nav li{
 		display:block;
 	}
-	
+
 	fieldset dt, fieldset dd{
 		display:inline-block;
 		vertical-align:top;
 		margin:.5% 0;
 	}
-	
+
 	strong {
 		font-weight:bold;
 	}
-	
+
 	#task_view dt, th a{
 		font-weight:bold;
 	}
-	
+
 	.error{
 		font-weight:300;
 	}
-	
+
 	#task_comment_list dt{
 		width:25%;
 		padding:.5em;
@@ -721,12 +721,12 @@ select#friends option{
 		width:70%;
 		padding:.5em;
 	}
-	
+
 	.immediate, td.immediate, .overdue td{
 		font-weight:bold;
 		font-style:italic;
 	}
-	
+
 	.overdue td{
 		font-weight:bold;
 	}
@@ -736,7 +736,7 @@ select#friends option{
 		vertical-align:top;
 		margin:.5em auto;
 	}
-	
+
 	#home .right dt, #home .right dd{
 		width:45%;
 		display:inline-block;

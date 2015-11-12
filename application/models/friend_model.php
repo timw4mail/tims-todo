@@ -6,16 +6,6 @@
 class Friend_model extends CI_Model {
 
 	/**
-	 * Constructor
-	 */
-	public function __construct()
-	{
-		parent::__construct();
-	}
-
-	// --------------------------------------------------------------------------
-
-	/**
 	 * Get Friends
 	 *
 	 * Gets list of friends and their associated groups

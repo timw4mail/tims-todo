@@ -3,7 +3,7 @@
 <phpunit
 	colors="true"
 	stopOnFailure="false"
-	bootstrap="bootstrap.php">
+	bootstrap="../tests/bootstrap.php">
 	<php>
 		<server name="SERVER_NAME" value="http://example.com" />
 		<server name="REMOTE_ADDR" value="127.0.0.1" />
@@ -20,22 +20,29 @@
 	</filter>
 	<testsuites>
 		<testsuite name="ControllerTests">
-			<directory suffix=".php">controllers</directory>
+			<directory suffix=".php">../tests/controllers</directory>
 		</testsuite>
 		<testsuite name="ExtensionTests">
-			<directory suffix=".php">core</directory>
+			<directory suffix=".php">../tests/core</directory>
 		</testsuite>
 		<testsuite name="HelperTests">
-			<directory suffix=".php">helpers</directory>
+			<directory suffix=".php">../tests/helpers</directory>
 		</testsuite>
 		<testsuite name="LibTests">
-			<directory suffix=".php">libs</directory>
+			<directory suffix=".php">../tests/libs</directory>
 		</testsuite>
 		<testsuite name="ModelTests">
-			<directory suffix=".php">models</directory>
+			<directory suffix=".php">../tests/models</directory>
 		</testsuite>
 		<testsuite name="SystemTests">
-			<directory suffix=".php">system</directory>
+			<directory suffix=".php">../tests/system</directory>
 		</testsuite>
 	</testsuites>
+	<logging>
+		<log type="coverage-html" target="coverage"/>
+		<log type="coverage-clover" target="logs/clover.xml"/>
+		<log type="coverage-crap4j" target="logs/crap4j.xml"/>
+		<log type="coverage-xml" target="logs/coverage" />
+		<log type="junit" target="logs/junit.xml" logIncompleteSkipped="false"/>
+	</logging>
 </phpunit>

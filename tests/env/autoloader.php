@@ -20,15 +20,13 @@ spl_autoload_register(function($class) {
 		$exact_file = "{$path}{$class}.php";
 		$lower_file = $path . mb_strtolower($class) . ".php";
 
-		if (file_exists($lower_file))
+		foreach([$lower_file, $exact_file] as $file)
 		{
-			require_once($lower_file);
-			return;
-		}
-		else if (file_exists($exact_file))
-		{
-			require_once($exact_file);
-			return;
+			if (file_exists($file))
+			{
+				require_once($file);
+				return;
+			}
 		}
 	}
 });

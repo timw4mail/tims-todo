@@ -179,6 +179,7 @@ class Task extends MY_Controller {
 	{
 		$task_id = (int) $task_id;
 		$data = $this->task_model->get_task_by_id($task_id);
+
 		$data['cat_list'] = $this->task_model->get_category_select($task_id);
 		$data['pri_list'] = $this->task_model->get_priority_select($task_id);
 		$data['stat_list'] = $this->task_model->get_status_select($task_id);

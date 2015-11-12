@@ -4,19 +4,19 @@
 	<?php if($user_perms == PERM_ADMIN_ACCESS): ?>
 	<p id="delTask"><a href="#" onclick="if(confirm('Are you sure you want to delete this task')){window.location='<?= site_url('task/delete').'/'.$this->security->xss_clean($this->uri->segment('3')) ?>'}">Delete Task</a></p>
 	<?php endif ?>
-	<?= form_open('task/edit' . '/' . $this->uri->segment(3)); ?>
+	<?= form_open('task/edit' . '/' . (int)$this->uri->segment(3)); ?>
 
 	<fieldset>
 			<legend>Task</legend>
 			<dl>
 				<dt><label for="title">Title</label></dt>
 				<dd>
-					<input type="text" name="title" id="title" value="<?= set_value('title') ?>" placeholder="Task Heading" />
+					<input type="text" name="title" id="title" value="<?= $title ?>" placeholder="Task Heading" />
 				</dd>
 
 				<dt><label for="desc">Description</label></dt>
 				<dd>
-					<textarea rows="10" cols="80" name="desc" id="desc" placeholder="Task details"><?= set_value('description') ?></textarea>
+					<textarea rows="10" cols="80" name="desc" id="desc" placeholder="Task details"><?= $description ?></textarea>
 				</dd>
 
 				<dt><label for="category">Category</label></dt>
@@ -32,7 +32,7 @@
 						<?= $pri_list ?>
 					</select>
 				</dd>
-				
+
 				<dt><label for="status">Status</label></dt>
 				<dd>
 					<select name="status" id="status">
@@ -45,16 +45,16 @@
 					<input type="text" name="due" id="due" value="<?= ($due != 0) ? date('Y-m-d', $due) : 0 ?>" placeholder="YYYY-MM-DD" size="10" />
 					<label>Hour:
 						<select name="due_hour">
-							<option value="00"<?= (date('H', $due) == 00) ? ' selected="selected"' : "" ?>>Midnight</option>
-							<option value="01"<?= (date('H', $due) == 01) ? ' selected="selected"' : "" ?>>1 AM</option>
-							<option value="02"<?= (date('H', $due) == 02) ? ' selected="selected"' : "" ?>>2 AM</option>
-							<option value="03"<?= (date('H', $due) == 03) ? ' selected="selected"' : "" ?>>3 AM</option>
-							<option value="04"<?= (date('H', $due) == 04) ? ' selected="selected"' : "" ?>>4 AM</option>
-							<option value="05"<?= (date('H', $due) == 05) ? ' selected="selected"' : "" ?>>5 AM</option>
-							<option value="06"<?= (date('H', $due) == 06) ? ' selected="selected"' : "" ?>>6 AM</option>
-							<option value="07"<?= (date('H', $due) == 07) ? ' selected="selected"' : "" ?>>7 AM</option>
-							<option value="08"<?= (date('H', $due) == 08) ? ' selected="selected"' : "" ?>>8 AM</option>
-							<option value="09"<?= (date('H', $due) == 09) ? ' selected="selected"' : "" ?>>9 AM</option>
+							<option value="00"<?= (date('H', $due) == 0) ? ' selected="selected"' : "" ?>>Midnight</option>
+							<option value="01"<?= (date('H', $due) == 1) ? ' selected="selected"' : "" ?>>1 AM</option>
+							<option value="02"<?= (date('H', $due) == 2) ? ' selected="selected"' : "" ?>>2 AM</option>
+							<option value="03"<?= (date('H', $due) == 3) ? ' selected="selected"' : "" ?>>3 AM</option>
+							<option value="04"<?= (date('H', $due) == 4) ? ' selected="selected"' : "" ?>>4 AM</option>
+							<option value="05"<?= (date('H', $due) == 5) ? ' selected="selected"' : "" ?>>5 AM</option>
+							<option value="06"<?= (date('H', $due) == 6) ? ' selected="selected"' : "" ?>>6 AM</option>
+							<option value="07"<?= (date('H', $due) == 7) ? ' selected="selected"' : "" ?>>7 AM</option>
+							<option value="08"<?= (date('H', $due) == 8) ? ' selected="selected"' : "" ?>>8 AM</option>
+							<option value="09"<?= (date('H', $due) == 9) ? ' selected="selected"' : "" ?>>9 AM</option>
 							<option value="10"<?= (date('H', $due) == 10) ? ' selected="selected"' : "" ?>>10 AM</option>
 							<option value="11"<?= (date('H', $due) == 11) ? ' selected="selected"' : "" ?>>11 AM</option>
 							<option value="12"<?= (date('H', $due) == 12) ? ' selected="selected"' : "" ?>>12 Noon</option>
@@ -188,7 +188,8 @@
 				<dt><label for="check_desc">Checklist item:</label></dt>
 				<dd>
 					<input type="text" size="10" name="check_desc" id="check_desc" />&nbsp;&nbsp;
-					<input type="button" name="add_checklist_item" id="add_checklist_item" value="Add Checklist Item" />
+					<button name="add_checklist_item" id="add_checklist_item">Add Checklist Item</button>
+					<?php /*<input type="button" name="add_checklist_item" id="add_checklist_item" value="Add Checklist Item" /> */ ?>
 				</dd>
 			</dl>
 			<?php $this->load->view('task/checklist_view'); ?>
@@ -202,7 +203,8 @@
 				<dd>
 					<textarea rows="10" cols="80" name="comment" id="comment"></textarea>
 					<br />
-					<input type="button" name="add_task_comment" id="add_task_comment" value="Submit comment" />
+					<button name="add_task_comment" id="add_task_comment">Submit Comment</button>
+					<?php /*<input type="button" name="add_task_comment" id="add_task_comment" value="Submit comment" />*/ ?>
 				</dd>
 			</dl>
 			<?php $this->load->view('task/comments_view'); ?>

@@ -1,5 +1,7 @@
 <?php
+$config = [];
 include "config.php";
+$config['base_url'] = (isset($config['base_url'])) ? $config['base_url'] : 'https://todo.timshomepage.net/';
 /*
 |--------------------------------------------------------------------------
 | Content Domain

@@ -3,7 +3,7 @@
 <?php $group_id = $this->uri->segment('3'); ?>
 <section class="right">
 	<h1>Manage Group</h1>
-	<form action="<?= site_url("group/manage") .'/'. $group_id  ?>" method="post">
+	<?= form_open("group/manage/" . (int)$group_id) ?>
 	<fieldset>
 		<legend>Group Members</legend>
 		<dl>

@@ -13,7 +13,7 @@ class Calendar extends MY_Controller {
 		parent::__construct();
 		$this->load->library('calendar');
 		$this->load->model('task_model');
-		
+
 	}
 
 	/**
@@ -40,17 +40,12 @@ class Calendar extends MY_Controller {
 		}
 
 		$_months = array(
-			01 => 'January', 02 => 'February',
-			03 => 'March', 04 => 'April',
-			05 => 'May', 06 => 'June',
-			07 => 'July', 08 => 'August',
-			09 => 'September', 10 => 'October',
-			11 => 'November', 12 => 'December',
 			1 => 'January', 2 => 'February',
 			3 => 'March', 4 => 'April',
 			5 => 'May', 6 => 'June',
 			7 => 'July', 8 => 'August',
-			9 => 'September',
+			9 => 'September', 10 => 'October',
+			11 => 'November', 12 => 'December'
 		);
 
 		$year = (isset($year)) ? $year : date('Y');

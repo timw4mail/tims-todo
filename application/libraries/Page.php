@@ -7,8 +7,8 @@
  * build_header(), build_footer(), and _headers() methods.
  */
 class Page {
-	
-	private static $meta, $head_js, $foot_js, $css, $title,
+
+	private $meta, $head_js, $foot_js, $css, $title,
 			$head_tags, $body_id;
 
 	/**
@@ -32,7 +32,7 @@ class Page {
 		$this->body_id = "";
 		$this->CI =& get_instance();
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
@@ -48,7 +48,7 @@ class Page {
 	{
 		$this->CI->output->set_header("Cache-Control: must-revalidate, public");
 		$this->CI->output->set_header("Vary: Accept");
-		
+
 		//Predefine charset and mime
 		$charset = "UTF-8";
 		$mime = "text/html";
@@ -59,17 +59,17 @@ class Page {
 		$this->CI->output->set_header("Content-Type: $mime;charset=$charset");
 		$this->CI->output->set_header("X-UA-Compatible: chrome=1");
 		$this->CI->output->set_output($doctype_string);
-		
+
 		return $this;
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
 	 * Set Meta
 	 *
 	 * Sets meta tags, with codeigniter native meta tag helper
-	 * 
+	 *
 	 * @param array $meta
 	 * @return Page
 	 */
@@ -78,7 +78,7 @@ class Page {
 		$this->meta .= T1.meta($meta).NL;
 		return $this;
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
@@ -94,7 +94,7 @@ class Page {
 		$this->head_js .= $this->script_tag($file, FALSE);
 		return $this;
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
@@ -128,7 +128,7 @@ class Page {
 		$this->foot_js .= $this->script_tag($file, FALSE);
 		return $this;
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
@@ -140,12 +140,12 @@ class Page {
 	{
 		$title = ($title == "") ?
 			$this->CI->config->item('default_title') : $title;
-			
+
 		$this->title = $title;
-		
+
 		return $this;
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
@@ -160,7 +160,7 @@ class Page {
 	}
 
 	// --------------------------------------------------------------------------
-	
+
 	/**
 	 * Sets custom page header
 	 * @return $this
@@ -199,10 +199,10 @@ class Page {
 
 		//Output Header
 		$this->CI->load->view('header', $data);
-		
+
 		return $this;
 	}
-	
+
 	// --------------------------------------------------------------------------
 
 	/**
@@ -233,9 +233,9 @@ class Page {
 
 		$this->CI->load->view('footer', $data);
 	}
-	
+
 	// --------------------------------------------------------------------------
-	
+
 	/**
 	 * Script Tag
 	 *
@@ -261,21 +261,21 @@ class Page {
 	}
 
 	// --------------------------------------------------------------------------
-	
+
 	/**
 	 * Num Queries
-	 * 
+	 *
 	 * Returns number of queries run on a page
-	 * 
+	 *
 	 * @return int
 	 */
 	public function num_queries()
 	{
 		return	(isset($this->CI->db)) ? count($this->CI->db->queries) : 0;
 	}
-	
+
 	// --------------------------------------------------------------------------
-	
+
 	/**
 	 * Set Message
 	 *
