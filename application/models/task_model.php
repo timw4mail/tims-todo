@@ -531,12 +531,6 @@ class Task_model extends CI_Model {
 		$status = ($this->input->post('status') == FALSE) ? 1 : $this->input->post('status');
 		$created = time();
 
-		/*$title = $this->title;
-		$desc = $this->description;
-		$category = $this->category;
-		$priority = $this->priority;
-		$status = $this->status;
-		$created = $this->created;*/
 		$due = $this->due;
 		$uid = $this->user_id;
 

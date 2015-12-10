@@ -175,8 +175,6 @@ class Todo {
 			//Get the current user's primary group
 			$group_id = $this->get_user_group();
 
-			//print_r($group_id);
-
 			$this->CI->db->set('title', $title)
 				->set('description', $desc)
 				->set('group_id', $group_id);
@@ -191,8 +189,6 @@ class Todo {
 			show_error('This category already exists!');
 			return false;
 		}
-
-
 	}
 
 	// --------------------------------------------------------------------------
@@ -322,14 +318,14 @@ class Todo {
 				->from('user')
 				->where('id', $user)
 				->get();
-		
+
 		$row = $user_check->row();
-		
+
 		if ( ! password_verify($old_pass, $row->password))
 		{
 			$err[] = "Wrong password";
 		}
-			
+
 		$res = (empty($err)) ? true : $err;
 
 		if($res == TRUE)
@@ -789,7 +785,7 @@ class Todo {
 	public function get_friend_requests()
 	{
 		static $requests = NULL;
-		
+
 		if (is_null($requests))
 		{
 			//Get friend requests for the current user
