@@ -10,9 +10,9 @@
 
 	<?php if($user_perms > PERM_CHECKLIST_ACCESS): ?>
 	<p id="editTask">
-		<?php if($user_perms == PERM_ADMIN_ACCESS){ ?>
+		<?php if($user_perms == PERM_ADMIN_ACCESS): ?>
 		<a href="#" id="delTask" onclick="if(confirm('Are you sure you want to delete this task')){window.location='<?= site_url('task/delete').'/'.$this->security->xss_clean($this->uri->segment('3')) ?>'}">Delete Task</a>
-		<?php } ?>
+		<?php endif ?>
 		<a id="editTaskIcon" href="<?= site_url('task/edit').'/'.$task ?>">Edit Task</a>
 
 	</p>

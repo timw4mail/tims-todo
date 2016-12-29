@@ -9,7 +9,7 @@
  */
 function check_session()
 {
-	$CI =& get_instance();
+	$CI = get_instance();
 
 	if($CI->session->userdata('uid') == FALSE)
 	{

@@ -605,12 +605,19 @@ class Task_model extends CI_Model {
 	 */
 	public function update_task()
 	{
+
+		$due_timestamp = $this->input->post('due') . ' ' .
+			$this->input->post('due_hour') . ':' .
+			$this->input->post('due_minute');
+
+		$unix_due = strtotime($due_timestamp);
+
 		$title = $this->input->post('title');;
 		$desc = str_replace('<br>', '<br />', $this->input->post('desc'));
 		$category = $this->input->post('category');
 		$priority = $this->input->post('priority');
 		$status = $this->input->post('status');
-		$due = $this->input->post('due');
+		$due = $unix_due;
 		$uid = $this->user_id;
 		$task_id = $this->task_id;
 

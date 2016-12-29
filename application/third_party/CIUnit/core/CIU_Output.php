@@ -9,7 +9,7 @@
 
 /*
 * CodeIgniter source modified for fooStack / CIUnit
-* 
+*
 * If you use MY_Output, change the paraent class.
 */
 
@@ -64,7 +64,7 @@ class CIU_Output extends CI_Output {
 	function set_no_cache_headers()
 	{
 		//somehow $this can't be used as headers are not set in that case
-		$CI =& get_instance();
+		$CI = get_instance();
 		$CI->output->soft_set_header('Content-type: text/html; charset=utf-8');
 		$CI->output->soft_set_header('Cache-Control: no-cache');
 		log_message('debug', 'no cache headers set in output class');
@@ -116,7 +116,7 @@ class CIU_Output extends CI_Output {
 	*/
 	function ob_flush_clean()
 	{
-		$CI =& get_instance();
+		$CI = get_instance();
 		if (ob_get_level() > $this->_ci_ob_level + 1)
 		{
 			ob_end_flush();
@@ -152,7 +152,7 @@ class CIU_Output extends CI_Output {
 		// Grab the super object if we can.
 		if (class_exists('CI_Controller'))
 		{
-			$CI =& get_instance();
+			$CI = get_instance();
 		}
 
 		// --------------------------------------------------------------------

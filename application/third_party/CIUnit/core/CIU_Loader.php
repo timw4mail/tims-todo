@@ -69,7 +69,7 @@ class CIU_Loader extends CI_Loader {
 					// return a new instance of the object
 					if ( ! is_null($object_name))
 					{
-						$CI =& get_instance();
+						$CI = get_instance();
 						if ( ! isset($CI->$object_name))
 						{
 							return $this->_ci_init_class($class, config_item('ciu_subclass_prefix'), $params, $object_name);
@@ -82,12 +82,12 @@ class CIU_Loader extends CI_Loader {
 				}
 
 				include_once($baseclass);
-				
+
 				if (file_exists($subclass))
 				{
 					include_once($subclass);
 				}
-				
+
 				include_once($ciu_subclass);
 				$this->_ci_loaded_files[] = $ciu_subclass;
 
@@ -113,7 +113,7 @@ class CIU_Loader extends CI_Loader {
 					// return a new instance of the object
 					if ( ! is_null($object_name))
 					{
-						$CI =& get_instance();
+						$CI = get_instance();
 						if ( ! isset($CI->$object_name))
 						{
 							return $this->_ci_init_class($class, config_item('subclass_prefix'), $params, $object_name);
@@ -152,7 +152,7 @@ class CIU_Loader extends CI_Loader {
 					// return a new instance of the object
 					if ( ! is_null($object_name))
 					{
-						$CI =& get_instance();
+						$CI = get_instance();
 						if ( ! isset($CI->$object_name))
 						{
 							return $this->_ci_init_class($class, '', $params, $object_name);
@@ -281,7 +281,7 @@ class CIU_Loader extends CI_Loader {
 		// Save the class name and object name
 		$this->_ci_classes[$class] = $classvar;
 		// Instantiate the class
-		$CI =& get_instance();
+		$CI = get_instance();
 		if ($config !== NULL)
 		{
 			if ( ! defined('CIUnit_Version'))
@@ -334,7 +334,7 @@ class CIU_Loader extends CI_Loader {
 		}
 
 		$output = $this->_ci_load(array('_ci_view' => $view, '_ci_vars' => $this->_ci_object_to_array($vars), '_ci_return' => TRUE));
-		$CI =& get_instance();
+		$CI = get_instance();
 		$CI->output->add_output($output);
 	}
 
@@ -358,12 +358,12 @@ class CIU_Loader extends CI_Loader {
 			}
 
 			$ciu_helper = CIUPATH.'helpers/'.config_item('ciu_subclass_prefix').$helper.'.php';
-			
+
 			if (file_exists($ciu_helper))
 			{
 				include_once($ciu_helper);
 			}
-			
+
 			$ext_helper = APPPATH.'helpers/'.config_item('subclass_prefix').$helper.'.php';
 
 			// Is this a helper extension request?
