@@ -438,7 +438,7 @@ class Task_model extends CI_Model {
 		//If there is an email reminder
 		if($this->input->post('reminder') == 'rem_true')
 		{
-			if($due == 0)
+			if($due === 0)
 			{
 				$err[] = "You must set a due date in order to get a reminder.";
 			}
@@ -502,9 +502,9 @@ class Task_model extends CI_Model {
 			$this->friend_perms = (isset($friend_perms)) ? $friend_perms : FALSE;
 			$this->group_perms = (isset($group_perms)) ? $group_perms : FALSE;
 			$this->user_id = $this->session->userdata('uid');
-			$this->task_id = ($this->input->post('task_id') != FALSE) ?
-					$this->input->post('task_id') :
-					$this->db->count_all('item') + 1;
+			$this->task_id = ($this->input->post('task_id') != FALSE)
+				? $this->input->post('task_id')
+				: $this->db->count_all('item') + 1;
 
 			return TRUE;
 		}
@@ -626,7 +626,7 @@ class Task_model extends CI_Model {
 			->set('status', $status)
 			->set('title', $title)
 			->set('description', $desc)
-			->set('due', $due)
+			->set('due', (int)$due)
 			->set('modified', time())
 			->where('id', $task_id)
 			->where('user_id', $uid);
