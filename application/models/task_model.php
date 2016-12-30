@@ -6,11 +6,18 @@
  */
 class Task_model extends CI_Model {
 
-	private $title, $description, $category, $priority, $due,
+	protected $title, $description, $category, $priority, $due,
 			$status, $user_id, $task_id, $reminder, $reminder_time,
 			$groups, $group_perms, $friends, $friend_perms, $share_type;
 
 	public $form_vals;
+
+	// --------------------------------------------------------------------------
+
+	public function __construct()
+	{
+		// $this->output->enable_profiler(TRUE);
+	}
 
 	// --------------------------------------------------------------------------
 
@@ -473,7 +480,7 @@ class Task_model extends CI_Model {
 		$share_type = FALSE;
 
 		//If the task is shared
-		if($this->input->post('share') !== FALSE)
+		if($this->input->post('share') != FALSE)
 		{
 			$groups = $this->input->post('group', TRUE);
 			$group_perms = $this->input->post('group_perms', TRUE);
@@ -504,14 +511,17 @@ class Task_model extends CI_Model {
 			$this->user_id = $this->session->userdata('uid');
 			$this->task_id = ($this->input->post('task_id') != FALSE)
 				? $this->input->post('task_id')
-				: $this->db->count_all('item') + 1;
+				: NULL; //$this->db->count_all('item') + 1;
+
+/* ?><pre><?= print_r([
+	'class' => $this,
+	'input' => $this->input->post()
+], TRUE); ?><?php die(); */
 
 			return TRUE;
 		}
-		else //otherwise, return the errors
-		{
-			return $err;
-		}
+
+		return $err;
 	}
 
 	// --------------------------------------------------------------------------
@@ -666,15 +676,16 @@ class Task_model extends CI_Model {
 
 			if ( ! empty($friend_list))
 			{
-				$this->db->where_in('user_id', $friend_list)
-					->where('task_id', $task_id)
-					->or_where('user_id', (int) $this->session->userdata('uid'))
+				$user_ids = array_merge(
+					[(int) $this->session->userdata('uid')],
+					$friend_list
+				);
+				$this->db->where_in('user_id', $user_ids)
 					->where('task_id', $task_id)
 					->delete('user_task_link');
 			}
 
 		}
-
 
 		//Get groups
 		if($this->share_type == 'group')
@@ -705,7 +716,9 @@ class Task_model extends CI_Model {
 				}
 
 				if ($this->db->affected_rows() < 1)
-						{return false;}
+				{
+					return false;
+				}
 
 				//Set current user too
 				$this->db->set('user_id', $this->session->userdata('uid'))
@@ -1382,7 +1395,7 @@ class Task_model extends CI_Model {
 	 * @param int $task_id
 	 * @return array
 	 */
-	private function _get_task_perms($task_id)
+	private function _get_task_perms(int $task_id)
 	{
 		/**
 		 * Get the task shared permissions
@@ -1394,7 +1407,7 @@ class Task_model extends CI_Model {
 			->join('group_users_link', 'group_users_link.user_id=user.id', 'inner')
 			->join('group_task_link', 'group_task_link.group_id=group_users_link.group_id', 'inner')
 			->join('item', 'item.id=group_task_link.task_id', 'inner')
-			->where('todo_item.id', (int) $task_id)
+			->where('todo_item.id', $task_id)
 			->where('todo_group_task_link.permissions !=', PERM_NO_ACCESS)
 			->where('todo_user.id', (int) $this->session->userdata('uid'))
 			->limit(1)
@@ -1405,7 +1418,7 @@ class Task_model extends CI_Model {
 			->from('item')
 			->join('user_task_link', 'user_task_link.task_id=item.id')
 			->where('todo_user_task_link.permissions !=', PERM_NO_ACCESS)
-			->where('todo_user_task_link.task_id', (int) $task_id)
+			->where('todo_user_task_link.task_id', $task_id)
 			->where('todo_user_task_link.user_id', (int) $this->session->userdata('uid'))
 			->limit(1)
 			->get();
@@ -1456,7 +1469,7 @@ class Task_model extends CI_Model {
 			->join('group_users_link', 'group_users_link.user_id=user.id', 'inner')
 			->join('group_task_link', 'group_task_link.group_id=group_users_link.group_id', 'inner')
 			->where('todo_group_users_link.user_id', (int) $this->session->userdata('uid'))
-			->where('todo_group_task_link.task_id', (int) $task_id)
+			->where('todo_group_task_link.task_id', $task_id)
 			->get();
 
 		//Check user permissions
@@ -1469,14 +1482,14 @@ class Task_model extends CI_Model {
 		//Check if task admin
 		$upA = $this->db->select('id')
 			->from('item')
-			->where('id', (int) $task_id)
+			->where('id', $task_id)
 			->where('user_id', (int) $this->session->userdata('uid'))
 			->get();
 
 		//Check for admin permissions
 		if($upA->num_rows() > 0)
 		{
-			$result_array['user_perms'] = 9;
+			$result_array['user_perms'] = PERM_ADMIN_ACCESS;
 			return $result_array;
 		}
 		else //User is not admin
@@ -1492,7 +1505,16 @@ class Task_model extends CI_Model {
 			if($upU->num_rows() > 0)
 			{
 				$up_row = $upU->row_array();
-				$result_array['user_perms'] = $up_row['permissions'];
+
+				// Only overwrite group permissions if there are higher
+				// user permissions than group permissions
+				if (
+					$result_array['user_perms'] == PERM_NO_ACCESS ||
+					$up_row['permissions'] > $result_array['user_perms']
+					)
+				{
+					$result_array['user_perms'] = $up_row['permissions'];
+				}
 			}
 
 			//Determine whether the current user can view and/or edit this task

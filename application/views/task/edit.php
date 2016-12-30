@@ -117,12 +117,12 @@
 						<dt><label for="friend_perms">Permissions</label></dt>
 						<dd>
 						<select name="friend_perms" id="friend_perms">
-							<option value="-1" <?= ($friend_perms === PERM_NO_ACCESS) ? 'selected="selected"':''?>>No Access</option>
-							<option value="0" <?= ($friend_perms === PERM_READ_ACCESS) ? 'selected="selected"':''?>>Read-only Access</option>
-							<option value="1" <?= ($friend_perms === PERM_COMMENT_ACCESS) ? 'selected="selected"':''?>>Comment-only Access</option>
-							<option value="2" <?= ($friend_perms === PERM_CHECKLIST_ACCESS) ? 'selected="selected"':''?>>Comment and Checklist Access</option>
-							<option value="3" <?= ($friend_perms === PERM_WRITE_ACCESS) ? 'selected="selected"':''?>>Read and Write Access</option>
-							<option value="9" <?= ($friend_perms === PERM_ADMIN_ACCESS) ? 'selected="selected"':''?>>Task Admin (Read/Write/Delete)</option>
+							<option value="-1" <?= ($friend_perms === PERM_NO_ACCESS || !(is_numeric($friend_perms))) ? 'selected="selected"':''?>>No Access</option>
+							<option value="0" <?= ($friend_perms == PERM_READ_ACCESS) ? 'selected="selected"':''?>>Read-only Access</option>
+							<option value="1" <?= ($friend_perms == PERM_COMMENT_ACCESS) ? 'selected="selected"':''?>>Comment-only Access</option>
+							<option value="2" <?= ($friend_perms == PERM_CHECKLIST_ACCESS) ? 'selected="selected"':''?>>Comment and Checklist Access</option>
+							<option value="3" <?= ($friend_perms == PERM_WRITE_ACCESS) ? 'selected="selected"':''?>>Read and Write Access</option>
+							<option value="9" <?= ($friend_perms == PERM_ADMIN_ACCESS) ? 'selected="selected"':''?>>Task Admin (Read/Write/Delete)</option>
 						</select>
 						</dd>
 					</dl>

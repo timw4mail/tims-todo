@@ -175,9 +175,8 @@ class Task extends MY_Controller {
 	 *
 	 * @param int $task_id
 	 */
-	public function edit($task_id)
+	public function edit(int $task_id)
 	{
-		$task_id = (int) $task_id;
 		$data = $this->task_model->get_task_by_id($task_id);
 
 		$data['cat_list'] = $this->task_model->get_category_select($task_id);
@@ -190,13 +189,9 @@ class Task extends MY_Controller {
 
 		if ($this->input->post('edit_sub') == 'Update Task')
 		{
-			$val = $this->task_model->validate_task();
-
-			if($val === TRUE)
+			if($this->task_model->validate_task() === TRUE)
 			{
-				$done = $this->task_model->update_task();
-
-				if ($done === TRUE)
+				if ($this->task_model->update_task() === TRUE)
 				{
 					//Redirect to task list
 					$this->session->set_flashdata([
@@ -205,17 +200,15 @@ class Task extends MY_Controller {
 					]);
 
 					$this->todo->redirect_303(site_url('task/list'));
+					return;
 				}
-				else
-				{
-					$data['err'][] = "Database Error, Please try again later.";
-				}
+
+				$data['err'][] = "Database Error, Please try again later.";
 			}
 			else
 			{
 				$data['err'] = $val;
 			}
-
 		}
 
 		$this->page->set_title("Edit Task");
@@ -229,7 +222,7 @@ class Task extends MY_Controller {
 	 *
 	 * @param int $task_id
 	 */
-	public function view($task_id = NULL)
+	public function view(int $task_id = NULL)
 	{
 		if( ! is_numeric($task_id))
 		{
@@ -246,7 +239,6 @@ class Task extends MY_Controller {
 		$data['checklist'] = $this->task_model->get_checklist($task_id);
 		$data['task'] = $task_id;
 
-
 		$this->page->set_title("View Task");
 		$this->page->set_body_id("task_details");
 		$this->page->build('task/view', $data);
@@ -257,7 +249,7 @@ class Task extends MY_Controller {
 	/**
 	 * Delete a task
 	 */
-	public function delete($task_id)
+	public function delete(int $task_id)
 	{
 		$this->task_model->delete_task((int) $task_id);
 	}
