@@ -2,26 +2,37 @@
 /**
  * CodeIgniter
  *
- * An open source application development framework for PHP 5.2.4 or newer
+ * An open source application development framework for PHP
  *
- * NOTICE OF LICENSE
+ * This content is released under the MIT License (MIT)
  *
- * Licensed under the Open Software License version 3.0
+ * Copyright (c) 2014 - 2019, British Columbia Institute of Technology
  *
- * This source file is subject to the Open Software License (OSL 3.0) that is
- * bundled with this package in the files license.txt / license.rst.  It is
- * also available through the world wide web at this URL:
- * http://opensource.org/licenses/OSL-3.0
- * If you did not receive a copy of the license and are unable to obtain it
- * through the world wide web, please send an email to
- * licensing@ellislab.com so we can send you a copy immediately.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
  *
- * @package		CodeIgniter
- * @author		EllisLab Dev Team
- * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (http://ellislab.com/)
- * @license		http://opensource.org/licenses/OSL-3.0 Open Software License (OSL 3.0)
- * @link		http://codeigniter.com
- * @since		Version 1.0
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ *
+ * @package	CodeIgniter
+ * @author	EllisLab Dev Team
+ * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
+ * @copyright	Copyright (c) 2014 - 2019, British Columbia Institute of Technology (https://bcit.ca/)
+ * @license	https://opensource.org/licenses/MIT	MIT License
+ * @link	https://codeigniter.com
+ * @since	Version 1.3.0
  * @filesource
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
@@ -37,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @subpackage	Drivers
  * @category	Database
  * @author		EllisLab Dev Team
- * @link		http://codeigniter.com/user_guide/database/
+ * @link		https://codeigniter.com/user_guide/database/
  */
 class CI_DB_postgre_driver extends CI_DB {
 
@@ -119,9 +130,9 @@ class CI_DB_postgre_driver extends CI_DB {
 		 */
 		foreach (array('connect_timeout', 'options', 'sslmode', 'service') as $key)
 		{
-			if (isset($this->$key) && is_string($this->key) && $this->key !== '')
+			if (isset($this->$key) && is_string($this->$key) && $this->$key !== '')
 			{
-				$this->dsn .= $key."='".$this->key."' ";
+				$this->dsn .= $key."='".$this->$key."' ";
 			}
 		}
 
@@ -138,22 +149,21 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function db_connect($persistent = FALSE)
 	{
-		if ($persistent === TRUE
-			&& ($this->conn_id = pg_pconnect($this->dsn))
-			&& pg_connection_status($this->conn_id) === PGSQL_CONNECTION_BAD
-			&& pg_ping($this->conn_id) === FALSE
-		)
-		{
-			return FALSE;
-		}
-		else
-		{
-			$this->conn_id = pg_connect($this->dsn);
-		}
+		$this->conn_id = ($persistent === TRUE)
+			? pg_pconnect($this->dsn)
+			: pg_connect($this->dsn);
 
-		if ($this->conn_id && ! empty($this->schema))
+		if ($this->conn_id !== FALSE)
 		{
-			$this->simple_query('SET search_path TO '.$this->schema.',public');
+			if ($persistent === TRUE
+				&& pg_connection_status($this->conn_id) === PGSQL_CONNECTION_BAD
+				&& pg_ping($this->conn_id) === FALSE
+			)
+			{
+				return FALSE;
+			}
+
+			empty($this->schema) OR $this->simple_query('SET search_path TO '.$this->schema.',public');
 		}
 
 		return $this->conn_id;
@@ -203,10 +213,6 @@ class CI_DB_postgre_driver extends CI_DB {
 		{
 			return $this->data_cache['version'];
 		}
-		elseif ( ! $this->conn_id)
-		{
-			$this->initialize();
-		}
 
 		if ( ! $this->conn_id OR ($pg_version = pg_version($this->conn_id)) === FALSE)
 		{
@@ -218,8 +224,8 @@ class CI_DB_postgre_driver extends CI_DB {
 		 * and so we'll have to fall back to running a query in
 		 * order to get it.
 		 */
-		return isset($pg_version['server'])
-			? $this->data_cache['version'] = $pg_version['server']
+		return (isset($pg_version['server']) && preg_match('#^(\d+\.\d+)#', $pg_version['server'], $match))
+			? $this->data_cache['version'] = $match[1]
 			: parent::version();
 	}
 
@@ -241,22 +247,10 @@ class CI_DB_postgre_driver extends CI_DB {
 	/**
 	 * Begin Transaction
 	 *
-	 * @param	bool	$test_mode
 	 * @return	bool
 	 */
-	public function trans_begin($test_mode = FALSE)
+	protected function _trans_begin()
 	{
-		// When transactions are nested we only begin/commit/rollback the outermost ones
-		if ( ! $this->trans_enabled OR $this->_trans_depth > 0)
-		{
-			return TRUE;
-		}
-
-		// Reset the transaction failure flag.
-		// If the $test_mode flag is set to TRUE transactions will be rolled back
-		// even if the queries produce a successful result.
-		$this->_trans_failure = ($test_mode === TRUE);
-
 		return (bool) pg_query($this->conn_id, 'BEGIN');
 	}
 
@@ -267,14 +261,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	 *
 	 * @return	bool
 	 */
-	public function trans_commit()
+	protected function _trans_commit()
 	{
-		// When transactions are nested we only begin/commit/rollback the outermost ones
-		if ( ! $this->trans_enabled OR $this->_trans_depth > 0)
-		{
-			return TRUE;
-		}
-
 		return (bool) pg_query($this->conn_id, 'COMMIT');
 	}
 
@@ -285,14 +273,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	 *
 	 * @return	bool
 	 */
-	public function trans_rollback()
+	protected function _trans_rollback()
 	{
-		// When transactions are nested we only begin/commit/rollback the outermost ones
-		if ( ! $this->trans_enabled OR $this->_trans_depth > 0)
-		{
-			return TRUE;
-		}
-
 		return (bool) pg_query($this->conn_id, 'ROLLBACK');
 	}
 
@@ -306,13 +288,18 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function is_write_type($sql)
 	{
-		return (bool) preg_match('/^\s*"?(SET|INSERT(?![^\)]+\)\s+RETURNING)|UPDATE(?!.*\sRETURNING)|DELETE|CREATE|DROP|TRUNCATE|LOAD|COPY|ALTER|RENAME|GRANT|REVOKE|LOCK|UNLOCK|REINDEX)\s/i', str_replace(array("\r\n", "\r", "\n"), ' ', $sql));
+		if (preg_match('#^(INSERT|UPDATE).*RETURNING\s.+(\,\s?.+)*$#is', $sql))
+		{
+			return FALSE;
+		}
+
+		return parent::is_write_type($sql);
 	}
 
 	// --------------------------------------------------------------------
 
 	/**
-	 * Platform-dependant string escape
+	 * Platform-dependent string escape
 	 *
 	 * @param	string
 	 * @return	string
@@ -367,8 +354,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 */
 	public function insert_id()
 	{
-		$v = pg_version($this->conn_id);
-		$v = isset($v['server']) ? $v['server'] : 0; // 'server' key is only available since PosgreSQL 7.4
+		$v = $this->version();
 
 		$table	= (func_num_args() > 0) ? func_get_arg(0) : NULL;
 		$column	= (func_num_args() > 1) ? func_get_arg(1) : NULL;
@@ -453,13 +439,8 @@ class CI_DB_postgre_driver extends CI_DB {
 	 * @param	string	$table
 	 * @return	array
 	 */
-	public function field_data($table = '')
+	public function field_data($table)
 	{
-		if ($table === '')
-		{
-			return ($this->db_debug) ? $this->display_error('db_field_param_missing') : FALSE;
-		}
-
 		$sql = 'SELECT "column_name", "data_type", "character_maximum_length", "numeric_precision", "column_default"
 			FROM "information_schema"."columns"
 			WHERE LOWER("table_name") = '.$this->escape(strtolower($table));
@@ -489,7 +470,7 @@ class CI_DB_postgre_driver extends CI_DB {
 	 * Error
 	 *
 	 * Returns an array containing code and message of the last
-	 * database error that has occured.
+	 * database error that has occurred.
 	 *
 	 * @return	array
 	 */
@@ -568,13 +549,13 @@ class CI_DB_postgre_driver extends CI_DB {
 		$ids = array();
 		foreach ($values as $key => $val)
 		{
-			$ids[] = $val[$index];
+			$ids[] = $val[$index]['value'];
 
 			foreach (array_keys($val) as $field)
 			{
 				if ($field !== $index)
 				{
-					$final[$field][] = 'WHEN '.$val[$index].' THEN '.$val[$field];
+					$final[$val[$field]['field']][] = 'WHEN '.$val[$index]['value'].' THEN '.$val[$field]['value'];
 				}
 			}
 		}
@@ -582,12 +563,12 @@ class CI_DB_postgre_driver extends CI_DB {
 		$cases = '';
 		foreach ($final as $k => $v)
 		{
-			$cases .= $k.' = (CASE '.$index."\n"
+			$cases .= $k.' = (CASE '.$val[$index]['field']."\n"
 				.implode("\n", $v)."\n"
 				.'ELSE '.$k.' END), ';
 		}
 
-		$this->where($index.' IN('.implode(',', $ids).')', NULL, FALSE);
+		$this->where($val[$index]['field'].' IN('.implode(',', $ids).')', NULL, FALSE);
 
 		return 'UPDATE '.$table.' SET '.substr($cases, 0, -2).$this->_compile_wh('qb_where');
 	}
@@ -636,6 +617,3 @@ class CI_DB_postgre_driver extends CI_DB {
 	}
 
 }
-
-/* End of file postgre_driver.php */
-/* Location: ./system/database/drivers/postgre/postgre_driver.php */

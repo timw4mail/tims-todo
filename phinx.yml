@@ -1,0 +1,33 @@
+paths:
+    migrations: %%PHINX_CONFIG_DIR%%/migrations
+
+environments:
+    default_migration_table: phinxlog
+    default_database: development
+
+    development:
+        adapter: pgsql
+        host: localhost
+        name: todo
+        user: todo
+        pass: todo
+        port: 5432
+        charset: utf8
+
+    testing:
+        adapter: pgsql
+        host: localhost
+        name: todo_test
+        user: todo_test
+        pass: test
+        port: 5432
+        charset: utf8
+
+    node:
+        adapter: mysql
+        host: localhost
+        name: node
+        user: node
+        pass: node
+        port: 3306
+        charset: utf8

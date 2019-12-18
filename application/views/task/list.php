@@ -46,7 +46,7 @@
 		<?= $this->pagination->create_links(); ?>
 	</section>
 	<?php endif ?>
-	<?php elseif(count($task_list) < 1): ?>
+	<?php elseif(empty($task_list)): ?>
 	<h1><?= $list_type ?> Tasks</h1>
 	<p>You currently have no <?= $list_type ?> tasks.</p>
 	<?php endif; ?>

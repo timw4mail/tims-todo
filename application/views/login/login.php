@@ -18,7 +18,7 @@
 		</ul>
 		<p>If it sounds interesting, or useful, sign up and try it out.</p>
 		<p><strong>Want to try it without creating an account? Login with username: <em>guest</em> and password: <em>guest</em></strong></p>
-		<p>It's nice to have feedback. Send suggestions/comments/criticism to <a href="mailto:tim@timshomepage.net?subject=Tim's Todo Feedback">tim (at) timshomepage.net</a> or <a href="http://twitter.com/timw4mail">@timw4mail</a> on Twitter.</p>
+		<p>It's nice to have feedback. Send suggestions/comments/criticism to <a href="mailto:tim@timshomepage.net?subject=Tim's Todo Feedback">tim (at) timshomepage.net</a>.</p>
 	</section>
 	<section class="right">
 	<?= form_open('login') ?>

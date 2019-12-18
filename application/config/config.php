@@ -106,6 +106,27 @@ $config['enable_hooks'] = TRUE;
 */
 $config['subclass_prefix'] = 'MY_';
 
+/*
+|--------------------------------------------------------------------------
+| Composer auto-loading
+|--------------------------------------------------------------------------
+|
+| Enabling this setting will tell CodeIgniter to look for a Composer
+| package auto-loader script in application/vendor/autoload.php.
+|
+|	$config['composer_autoload'] = TRUE;
+|
+| Or if you have your vendor/ directory located somewhere else, you
+| can opt to set a specific path as well:
+|
+|	$config['composer_autoload'] = '/path/to/vendor/autoload.php';
+|
+| For more information about Composer, please visit http://getcomposer.org/
+|
+| Note: This will NOT disable or override the CodeIgniter-specific
+|	autoloading (application/config/autoload.php)
+*/
+$config['composer_autoload'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,11 +170,25 @@ $config['permitted_uri_chars'] = 'a-z 0-9~%.:_\-';
 | use segment based URLs.
 |
 */
-$config['allow_get_array']		= TRUE;
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger'] 	= 'c';
 $config['function_trigger'] 	= 'm';
-$config['directory_trigger'] 	= 'd'; // experimental not currently in use
+$config['directory_trigger'] 	= 'd';
+
+/*
+|--------------------------------------------------------------------------
+| Allow $_GET array
+|--------------------------------------------------------------------------
+|
+| By default CodeIgniter enables access to the $_GET array.  If for some
+| reason you would like to disable it, set 'allow_get_array' to FALSE.
+|
+| WARNING: This feature is DEPRECATED and currently available only
+|          for backwards compatibility purposes!
+|
+*/
+$config['allow_get_array'] = TRUE;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -190,6 +225,33 @@ $config['log_path'] = '';
 
 /*
 |--------------------------------------------------------------------------
+| Log File Extension
+|--------------------------------------------------------------------------
+|
+| The default filename extension for log files. The default 'php' allows for
+| protecting the log files via basic scripting, when they are to be stored
+| under a publicly accessible directory.
+|
+| Note: Leaving it blank will default to 'php'.
+|
+*/
+$config['log_file_extension'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Log File Permissions
+|--------------------------------------------------------------------------
+|
+| The file system permissions to be applied on newly created log files.
+|
+| IMPORTANT: This MUST be an integer (no quotes) and you MUST use octal
+|            integer notation (i.e. 0700, 0644, etc.)
+*/
+$config['log_file_permissions'] = 0644;
+
+
+/*
+|--------------------------------------------------------------------------
 | Date Format for Logs
 |--------------------------------------------------------------------------
 |
@@ -201,6 +263,17 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 
 /*
 |--------------------------------------------------------------------------
+| Error Views Directory Path
+|--------------------------------------------------------------------------
+|
+| Leave this BLANK unless you would like to set something other than the default
+| application/views/errors/ directory.  Use a full server path with trailing slash.
+|
+*/
+$config['error_views_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
 | Cache Directory Path
 |--------------------------------------------------------------------------
 |
@@ -209,6 +282,24 @@ $config['log_date_format'] = 'Y-m-d H:i:s';
 |
 */
 $config['cache_path'] = '';
+
+/*
+|--------------------------------------------------------------------------
+| Cache Include Query String
+|--------------------------------------------------------------------------
+|
+| Whether to take the URL query string into consideration when generating
+| output cache files. Valid options are:
+|
+|	FALSE      = Disabled
+|	TRUE       = Enabled, take all query parameters into account.
+|	             Please be aware that this may result in numerous cache
+|	             files generated for the same page over and over again.
+|	array('q') = Enabled, but only take into account the specified list
+|	             of query parameters.
+|
+*/
+$config['cache_query_string'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -226,21 +317,59 @@ $config['encryption_key'] = "xLx45kOkywjdvvVMxLov";
 | Session Variables
 |--------------------------------------------------------------------------
 |
-| 'session_cookie_name' = the name you want for the cookie
-| 'encrypt_sess_cookie' = TRUE/FALSE (boolean).  Whether to encrypt the cookie
-| 'session_expiration'  = the number of SECONDS you want the session to last.
-|  by default sessions last 7200 seconds (two hours).  Set to zero for no expiration.
-| 'time_to_update'		= how many seconds between CI refreshing Session Information
+| 'sess_driver'
+|
+|	The storage driver to use: files, database, redis, memcached
+|
+| 'sess_cookie_name'
+|
+|	The session cookie name, must contain only [0-9a-z_-] characters
+|
+| 'sess_expiration'
+|
+|	The number of SECONDS you want the session to last.
+|	Setting to 0 (zero) means expire when the browser is closed.
+|
+| 'sess_save_path'
+|
+|	The location to save sessions to, driver dependent.
+|
+|	For the 'files' driver, it's a path to a writable directory.
+|	WARNING: Only absolute paths are supported!
+|
+|	For the 'database' driver, it's a table name.
+|	Please read up the manual for the format with other session drivers.
+|
+|	IMPORTANT: You are REQUIRED to set a valid save path!
+|
+| 'sess_match_ip'
+|
+|	Whether to match the user's IP address when reading the session data.
+|
+|	WARNING: If you're using the database driver, don't forget to update
+|	         your session table's PRIMARY KEY when changing this setting.
+|
+| 'sess_time_to_update'
+|
+|	How many seconds between CI regenerating the session ID.
+|
+| 'sess_regenerate_destroy'
+|
+|	Whether to destroy session data associated with the old session ID
+|	when auto-regenerating the session ID. When set to FALSE, the data
+|	will be later deleted by the garbage collector.
+|
+| Other session cookie settings are shared with the rest of the application,
+| except for 'cookie_prefix' and 'cookie_httponly', which are ignored here.
 |
 */
-$config['sess_cookie_name']		= 'sess';
-$config['sess_expiration']		= 43200; //12 hours
-$config['sess_encrypt_cookie']	= FALSE;
-$config['sess_use_database']	= TRUE;
-$config['sess_table_name']		= 'ci_sessions';
-$config['sess_match_ip']		= TRUE;
-$config['sess_match_useragent']	= TRUE;
-$config['sess_time_to_update'] 	= 300;
+$config['sess_driver'] = 'database';
+$config['sess_cookie_name'] = 'sess';
+$config['sess_expiration'] = 43200; //12 hours
+$config['sess_save_path'] = 'ci_sessions';
+$config['sess_match_ip'] = FALSE;
+$config['sess_time_to_update'] = 300;
+$config['sess_regenerate_destroy'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -280,11 +409,15 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_token_name' = The token name
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
+| 'csrf_regenerate' = Regenerate token on every submission
+| 'csrf_exclude_uris' = Array of URIs which ignore CSRF checks
 */
-$config['csrf_protection'] = TRUE;
+$config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_token';
 $config['csrf_cookie_name'] = 'csrf_cookie';
 $config['csrf_expire'] = 7200;
+$config['csrf_regenerate'] = TRUE;
+$config['csrf_exclude_uris'] = array();
 
 /*
 |--------------------------------------------------------------------------
@@ -296,13 +429,17 @@ $config['csrf_expire'] = 7200;
 | Even if it does, however, not all browsers support compression
 | so enable only if you are reasonably sure your visitors can handle it.
 |
+| Only used if zlib.output_compression is turned off in your php.ini.
+| Please do not use it together with httpd-level output compression.
+|
 | VERY IMPORTANT:  If you are getting a blank page when compression is enabled it
 | means you are prematurely outputting something to your browser. It could
 | even be a line of whitespace at the end of one of your scripts.  For
 | compression to work, nothing can be sent before the output buffer is called
-| by the output class.  Do not "echo" any values with compression enabled.
+| by the output class.  Do not 'echo' any values with compression enabled.
 |
 */
+
 $config['compress_output'] = TRUE;
 
 /*
